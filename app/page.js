@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Home() {
-
     const [user, setUser] = useState(null);
     const [content, setContent] = useState("");
     const [posts, setPosts] = useState([]);
@@ -15,7 +14,10 @@ export default function Home() {
             axios
                 .get("/api/user", { headers: { Authorization: `Bearer ${token}` } })
                 .then((res) => setUser(res.data.user))
-                .catch(() => setUser(null));
+                .catch((err) => {
+                    console.error("Ошибка при получении пользователя:", err);
+                    setUser(null);
+                });
         }
         fetchPosts(); // Загружаем посты при монтировании компонента
     }, []);
@@ -23,12 +25,16 @@ export default function Home() {
     const fetchPosts = async () => {
         try {
             const res = await axios.get("/api/posts"); // GET-запрос
+            console.log("Ответ от API для постов:", res); // Логируем ответ
             setPosts(res.data);
         } catch (error) {
             console.error("Ошибка загрузки постов:", error);
+            // Если сервер возвращает не JSON, это поможет увидеть HTML ошибку
+            if (error.response) {
+                console.error("Ошибка API:", error.response.data);
+            }
         }
     };
-
 
     const handlePost = async () => {
         if (!content.trim()) return;
@@ -62,9 +68,13 @@ export default function Home() {
             )}
 
             <div className="posts">
-                {posts.map((post) => (
-                    <div key={post.id} className="post">{post.content}</div>
-                ))}
+                {Array.isArray(posts) && posts.length > 0 ? (
+                    posts.map((post) => (
+                        <div key={post.id} className="post">{post.content}</div>
+                    ))
+                ) : (
+                    <p>Нет постов для отображения.</p>
+                )}
             </div>
         </div>
     );

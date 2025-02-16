@@ -2,8 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { verifyToken } from "@/utils/auth"; // Функция для проверки JWT
 
 export const dynamic = "force-static";
-export const revalidate = 10;
-
+// export const revalidate = 10;
 
 const prisma = new PrismaClient();
 
@@ -13,8 +12,13 @@ export async function GET() {
             orderBy: { createdAt: "desc" },
             include: { user: { select: { id: true, username: true } } } // Получаем данные автора поста
         });
+
+        // Логируем данные, которые мы отдаем
+        console.log("Posts fetched from DB:", posts);
+
         return new Response(JSON.stringify(posts), { status: 200 });
     } catch (error) {
+        console.error("Ошибка загрузки постов:", error);
         return new Response(JSON.stringify({ error: "Ошибка загрузки постов" }), { status: 500 });
     }
 }
@@ -42,6 +46,7 @@ export async function POST(req) {
 
         return new Response(JSON.stringify(post), { status: 201 });
     } catch (error) {
+        console.error("Ошибка при создании поста:", error);
         return new Response(JSON.stringify({ error: "Something went wrong" }), { status: 500 });
     }
 }
