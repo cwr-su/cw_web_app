@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { verifyToken } from "@/utils/auth"; // Функция для проверки JWT
+import { verifyToken } from "@/utils/auth"; 
 
 export const dynamic = "force-static";
 // export const revalidate = 10;
@@ -13,7 +13,6 @@ export async function GET() {
             include: { user: { select: { id: true, username: true } } } // Получаем данные автора поста
         });
 
-        // Логируем данные, которые мы отдаем
         console.log("Posts fetched from DB:", posts);
 
         return new Response(JSON.stringify(posts), { status: 200 });
