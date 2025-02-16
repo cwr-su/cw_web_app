@@ -22,21 +22,24 @@ export default function RegisterPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
-
+        setError("");  // Очистка ошибок перед отправкой
+    
         const res = await fetch("/api/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(form),
         });
-
+    
         const data = await res.json();
+        console.log("API response:", data); // Логируем ответ от API
+    
         if (res.ok) {
-            router.push("/login"); // После регистрации перенаправляем на вход
+            router.push("/login"); // Перенаправление на страницу входа
         } else {
             setError(data.error || "Ошибка регистрации");
         }
     };
+    
 
     return (
         <div className="auth-container">
