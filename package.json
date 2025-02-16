@@ -7,7 +7,6 @@
     "build": "npm run prisma:generate && next build",
     "prisma:generate": "prisma generate",
     "vercel-build": "npm run prisma:generate && next build",
-    "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },
