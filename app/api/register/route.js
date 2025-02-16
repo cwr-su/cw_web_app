@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
+export const dynamic = "force-static";
+export const revalidate = 10;
+
 const prisma = new PrismaClient();
 
 export async function POST(req) {
