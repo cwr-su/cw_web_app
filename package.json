@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "prisma:generate": "prisma generate",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "npm run prisma:generate && next build"
   },
   "dependencies": {
     "@prisma/client": "^6.3.1",
