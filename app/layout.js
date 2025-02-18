@@ -1,5 +1,5 @@
 import "./globals.css";
-import LayoutClient from "./layoutClient"; // Импортируем клиентскую часть
+import LayoutClient from "./layoutClient";
 
 export default function RootLayout({ children }) {
     return (

@@ -24,12 +24,12 @@ export async function GET() {
 
 export async function POST(req) {
     try {
-        const token = req.headers.get("Authorization")?.split(" ")[1]; // Получаем токен из заголовка
+        const token = req.headers.get("Authorization")?.split(" ")[1];
         if (!token) {
             return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
         }
 
-        const decoded = verifyToken(token); // Проверяем токен
+        const decoded = verifyToken(token);
         if (!decoded) {
             return new Response(JSON.stringify({ error: "Invalid token" }), { status: 401 });
         }
