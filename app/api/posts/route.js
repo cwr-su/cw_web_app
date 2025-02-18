@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { verifyToken } from "@/utils/auth";
-import axios from "axios";
+import { verifyToken } from "@/utils/auth"; 
 
 // export const dynamic = "force-static";
 // export const revalidate = 10;
@@ -8,14 +7,6 @@ import axios from "axios";
 const prisma = new PrismaClient();
 
 export async function GET() {
-    axios.get('https://cwr-su-cw-web-app-4fef.twc1.net/api/posts')
-        .then(response => {
-            console.log('Data received:', response.data);
-        })
-        .catch(error => {
-            console.error('Error fetching posts:', error.response || error);
-        });
-
     try {
         const posts = await prisma.post.findMany({
             orderBy: { createdAt: "desc" },
