@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { verifyToken } from "@/utils/auth"; 
 
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 // export const revalidate = 10;
 
 const prisma = new PrismaClient();
