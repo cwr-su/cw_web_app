@@ -1,19 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 import { verifyToken } from "@/utils/auth"; 
 
-// export const dynamic = "force-static";
-// export const revalidate = 10;
-
 const prisma = new PrismaClient();
 
 export async function GET() {
     try {
         const posts = await prisma.post.findMany({
             orderBy: { createdAt: "desc" },
-            include: { user: { select: { id: true, username: true } } } // Получаем данные автора поста
+            include: { user: { select: { id: true, username: true } } }
         });
-
-        console.log("Posts fetched from DB:", posts);
 
         return new Response(JSON.stringify(posts), { status: 200 });
     } catch (error) {

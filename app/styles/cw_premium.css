@@ -1,0 +1,445 @@
+@import url('theme.css');
+@import url('fonts.css');
+
+@font-face {
+    font-family: "DIN-2014";
+    src: url('../fonts/din/din-2014-rounded-regular.ttf');
+}
+
+@font-face {
+    font-family: "Junegull_Regular";
+    src: url('../fonts/junegull_rg.ttf');
+}
+
+.subscribe {
+    padding: 0 1.25rem;
+}
+#subscribe {
+    margin: 0;
+}
+
+p, a,
+.tgme_widget_login large,
+.body.widget_frame_base
+ {
+    font-family: "DIN-2014";
+}
+
+.header-navbar p,
+.header-navbar a {
+    font-family: "Stem-Regular"
+}
+
+footer p {
+    font-family: "Stem-Regular", arial, sans-serif;
+}
+
+p {
+    font-size: 1.1rem;
+}
+
+.benefits {
+    display: block;
+    height: 775px;
+    margin: 0 auto;
+    transition: var(--transition-ease-in-out-navbar);
+}
+
+.benefits::before {
+    content: "";
+
+    background-image: var(--cover-cw-premium-benefits);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    transition: var(--transition-ease-in-out-navbar);
+
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* CW PREMIUM CARD*/
+.card {
+    transition: 200ms;
+}
+
+.card .card__title {
+    display: flex;
+    align-items: center;
+}
+
+.card .card__title h3 {
+    flex: 0 1 200px;
+    text-align: right;
+    margin: 0;
+    color: var(--navbar-color-link-after);
+    font-family: "Junegull_Regular";
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.card .card__title .icon {
+    flex: 1 0 10px;
+    background: var(--navbar-color-link);
+    color: #fff;
+    padding: 5px 5px;
+    transition: 200ms;
+}
+
+.card .card__title .icon>a {
+    color: #fff;
+}
+
+.card .card__title .icon:hover {
+    background: #252525;
+}
+
+.card .card__body {
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+    transition: var(--transition-ease-in-out-navbar);
+}
+
+.card .card__body>.half {
+    box-sizing: border-box;
+    flex: 1 0 50%;
+}
+.card .card__body>.half.renew {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card .card__body .featured_text h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 800;
+    font-family: "Junegull_Regular";
+    font-size: 64px;
+    line-height: 50px;
+    color: var(--span-loader-showmore);
+}
+
+.card .card__body .featured_text p {
+    margin: 0;
+    padding: 0;
+}
+
+.card .card__body .featured_text p.sub {
+    font-family: "Junegull_Regular";
+    font-size: 26px;
+    text-transform: uppercase;
+    color: var(--navbar-color-link);
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.card .card__body .featured_text p.price {
+    font-family: "DIN-2014";
+    color: var(--navbar-color-link-after);
+    font-size: 26px;
+}
+
+.card .card__body .image {
+    padding-top: 15px;
+    width: 100%;
+}
+
+.card .card__body .image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 30px 0 0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition-ease-in-out-navbar);
+}
+
+.card .card__body .image img:hover {
+    box-shadow: var(--wrapper-box-shadow);
+    transition: var(--transition-ease-in-out-navbar);
+}
+
+.card .card__body .description {
+    margin-bottom: 25px;
+}
+
+.card .card__body .description p {
+    margin: 0;
+    font-family: "DIN-2014";
+    font-weight: 300;
+    line-height: 27px;
+    font-size: 1.2rem;
+    color: var(--navbar-color-link-after);
+    user-select: none;
+}
+
+.card .card__body span.stock {
+    font-family: "DIN-2014";
+    font-weight: 600;
+    color: #a1cc16;
+    user-select: none;
+}
+
+.card .card__footer {
+    padding: 30px 5px;
+    display: flex;
+    flex-flow: row no-wrap;
+    align-items: center;
+    /* display: block; */
+    flex-direction: column;
+    user-select: none;
+}
+
+.card .card__footer::before {
+    content: "";
+    /* position: relative; */
+    /* display: block; */
+    top: 0;
+    left: 40px;
+    width: calc(100% - 40px);
+    height: 3px;
+    background: var(--link-color-on-page-bottom-after);
+    background: linear-gradient(to right, var(--link-color-on-page-bottom-after) 0%, var(--link-color-on-page-bottom-after) 20%, #ddd 20%, #ddd 100%);
+    border-radius: 50px;
+}
+
+.card .card__footer .recommend {
+    flex: 1 0 10px;
+}
+
+.card .card__footer .recommend p {
+    margin: 0;
+    font-family: "Junegull_Regular";
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+    padding: 0;
+}
+
+.card .card__footer .recommend h3 {
+    margin: 0;
+    font-size: 20px;
+    font-family: "DIN-2014";
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--link-color-on-page-bottom-after);
+    padding: 0;
+}
+
+.card .card__footer .action button {
+    cursor: pointer;
+    border: 1px solid var(--registration-auth-section-input-fields-bg-color);
+    padding: 14px 30px;
+    border-radius: 200px;
+    color: #fff;
+    background: var(--link-color-on-page-bottom-after);
+    font-family: "Junegull_Regular";
+    font-size: 16px;
+    transition: 200ms;
+    font-weight: 300;
+}
+.card .card__footer .action button a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: "Junegull_Regular";
+}
+
+.card .card__footer .action button:hover {
+    background: var(--color-placeholder);
+    color: var(--registration-auth-section-input-fields-bg-color);
+}
+
+.card .price-old {
+    text-decoration: line-through;
+    color: var(--navbar-color-button-more);
+}
+
+.card-footer-sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+.important {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.important p {
+    text-align: center;
+}
+
+.footnote p {
+    font-size: 1.1rem;
+    margin-top: .95rem;
+}
+
+.important {
+    background-color: var(--important-bg-color);
+    border-radius: 35px;
+    padding: 1rem 1rem;
+}
+
+/* media */
+
+@media (max-width: 1150px) {
+    .benefits {
+        height: 740px;
+    }
+}
+
+@media (max-width: 1090px) {
+    .benefits {
+        height: 695px;
+    }
+}
+
+@media (max-width: 1020px) {
+    .benefits {
+        height: 640px;
+    }
+}
+
+@media (max-width: 960px) {
+    .benefits {
+        height: 585px;
+    }
+}
+
+@media (max-width: 870px) {
+    .benefits {
+        height: 545px;
+    }
+}
+
+@media (max-width: 810px) {
+    .benefits {
+        height: 500px;
+    }
+}
+
+@media (max-width: 780px) {
+    .benefits {
+        height: 475px;
+    }
+}
+
+@media (max-width: 720px) {
+    .benefits {
+        height: 450px;
+    }
+
+    .benefits::before {
+        background-image: var(--cover-cw-premium-benefits-for-mob-devices);
+    }
+
+    .card .card__body {
+        flex-direction: column;
+        transition: var(--transition-ease-in-out-navbar);
+    }
+
+    .card .card__body .image img {
+        margin: 0;
+    }
+
+    .card .card__body .image {
+        margin: .5rem 0;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 460px) {
+    .card .card__body .image {
+        margin: .5rem 0;
+        padding: .5rem;
+    }
+
+    .card-footer-sub {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 395px) {
+    .benefits {
+        height: 420px;
+    }
+}
+
+@media (max-width: 368px) {
+    .benefits {
+        height: 385px;
+    }
+}
+
+@media (max-width: 355px) {
+    .benefits {
+        height: 340px;
+    }
+}
+
+.conn-tg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.hr-cw-premium {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 800;
+}
+
+.footnote p:last-child {
+    margin-top: .1rem;
+}
+
+.tgme_widget_login.large button.tgme_widget_login_button {
+    font-family: "DIN-2014", cursive;
+}
+
+#cwpremium-logo-icon {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    background-color: var(--body-background-color);
+    border-radius: 50px;
+    padding: 1rem;
+}
+
+#cwpremium-logo-icon {
+    width: 270px;
+    height: 75px;
+}
+
+#cwpremium-logo-icon::before {
+    content: "";
+
+    background-image: var(--span-logo-cw-premium-text-logo-icon);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    transition: var(--transition-ease-in-out-navbar);
+
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.card__footer #preloader,
+.card__footer #preloader_two {
+    margin: 0;
+}

@@ -1,0 +1,128 @@
+@import url(theme.css);
+
+@font-face {
+    font-family: JuneGull;
+    src: url('../fonts/junegull_rg.ttf');
+}
+
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: JuneGull;
+    background: var(--body-background-color);
+}
+
+#header {
+    background: url('/storage/parallax/parallax-cover-cw-premium-07.svg') no-repeat center top;
+    background-size: none;
+    position: fixed;
+    height: 95%;
+    bottom: 10%;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+@media screen and (max-width: 600px) {
+    #header {
+        background-size: cover;
+    }
+}
+
+#header .center {
+    background: var();
+    text-align: center;
+    position: absolute;
+    color: #ffffff;
+    color: #f5f7fa;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+#header .center .middle {
+    position: absolute;
+    margin-top: -8em;
+    right: 0;
+    left: 0;
+    top: 50%;
+}
+
+#header .center .middle h1 {
+    font-family: "Lusitana";
+    font-weight: normal;
+    line-height: 1em;
+    font-size: 11em;
+    margin: 0;
+}
+
+#header .center .middle span {
+    line-height: 5em;
+    font-size: 1em;
+}
+
+#pageHr {
+    background: #ffffff;
+    position: relative;
+    height: 5px;
+    display: block;
+    right: 0px;
+    left: 0px;
+    top: 90%;
+    z-index: 1;
+}
+
+#pageHr>i {
+    margin: -25px;
+    border: 5px solid #ffffff;
+    height: 40px;
+    width: 40px;
+    background: linear-gradient(39deg, #00DCFE, #00B0D7, #A543D0, #F543D0);
+    position: absolute;
+    display: block;
+    left: 50%;
+    top: 50%;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#pageHr>i>i {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    line-height: 36.8px;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    position: absolute;
+    color: #ffffff;
+    display: block;
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#page {
+    background: linear-gradient(-115deg, #00DCFE, #00B0D7, #A543D0, #F543D0);
+    position: relative;
+    height: 123.45%;
+    top: 90%;
+    padding: 10% 40px;
+    text-align: center;
+}
+
+#page a {
+    color: #fff;
+}
+
+p {
+    color: #fff;
+}

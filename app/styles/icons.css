@@ -1,0 +1,158 @@
+@import url('theme.css');
+
+#auth-icon, #cwpremium-icon, #home-icon, #projects-icon, #acdn-icon, #docs-icon,
+#from-dev-icon, #logout-icon, #ai-cw-icon, #edit-btn-pen, #user-star-icon {
+    display: block;
+    height: 50px;
+    margin: 0 auto;
+    transition: var(--transition-ease-in-out-navbar);
+    width: 50px;
+}
+
+.menu-mob a {
+    font-size: .85rem;
+    text-align: center;
+    opacity: .8;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .85rem;
+}
+
+.menu-mob a:focus, .menu-mob a:hover {
+    opacity: .8;
+    text-decoration: none;
+}
+
+.flex-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 3rem;
+    transition: var(--transition-ease-in-out-navbar);
+}
+
+.elem-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-self: flex-start;
+    transition: var(--transition-ease-in-out-navbar);
+    flex-direction: row;
+}
+
+.flex-navbar-left, .flex-navbar-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* place-self: flex-start; */
+    gap: 1rem;
+    border-radius: 30px;
+    background-color: var(--tile-background-color);
+    padding: 1.25rem 5rem;
+}
+
+@media (max-width: 560px) {
+    .flex-navbar {
+        gap: 3.5rem;
+    }
+}
+
+@media (max-width: 730px) {
+    .flex-navbar-left, .flex-navbar-right {
+        padding: 1.25rem 2.5rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .flex-navbar-left, .flex-navbar-right {
+        padding: 1.25rem 1.25rem;
+    }
+}
+
+@media (max-width: 485px) {
+    .flex-navbar {
+        gap: 2.25rem;
+        flex-direction: column-reverse;
+    }
+
+    .flex-navbar-left, .flex-navbar-right {
+        padding: 1.25rem 5rem;
+    }
+}
+
+@media (max-width: 355px) {
+    .flex-navbar-left, .flex-navbar-right {
+        padding: 1.25rem 3rem;
+    }
+}
+
+#auth-icon::before,
+#cwpremium-icon::before,
+#home-icon::before,
+#projects-icon::before,
+#acdn-icon::before,
+#docs-icon::before,
+#from-dev-icon::before,
+#logout-icon::before,
+#ai-cw-icon::before,
+#edit-btn-pen::before,
+#user-star-icon {
+    content: "";
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    transition: var(--transition-ease-in-out-navbar);
+
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#user-star-icon {
+    background-image: var(--span-logo-star);
+}
+
+#auth-icon::before {
+    background-image: var(--span-logo-auth-icon);
+}
+
+#cwpremium-icon::before {
+    background-image: var(--span-logo-cw-premium-icon);
+}
+
+#home-icon::before {
+    background-image: var(--span-logo-home-icon);
+}
+
+#projects-icon::before {
+    background-image: var(--span-logo-projects-icon);
+}
+
+#acdn-icon::before {
+    background-image: var(--span-logo-acdn-icon);
+}
+
+#docs-icon::before {
+    background-image: var(--span-logo-docs-icon);
+}
+
+#from-dev-icon::before {
+    background-image: var(--span-logo-from-dev-icon);
+}
+
+#logout-icon::before {
+    background-image: var(--span-logo-logout-icon);
+}
+
+#ai-cw-icon::before {
+    background-image: var(--span-logo-ai-cw-icon);
+}
+
+#edit-btn-pen::before {
+    background-image: var(--span-logo-edit-btn-pen-icon);
+    padding: 20px;
+}

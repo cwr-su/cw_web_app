@@ -25,7 +25,7 @@ export default function Home() {
             const res = await axios.get("/api/posts");
             setPosts(res.data);
         } catch (error) {
-            console.error("Ошибка загрузки постов:", error);
+            console.error("Error loading posts:", error);
         }
     };
 
@@ -38,7 +38,7 @@ export default function Home() {
             setContent("");
             fetchPosts();
         } catch (error) {
-            console.error("Ошибка при публикации поста:", error);
+            console.error("Error when publishing a post:", error);
         }
     };
 
@@ -51,12 +51,12 @@ export default function Home() {
                         className="whats_new"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        placeholder="Что нового?"
+                        placeholder="What's new?"
                     />
-                    <button onClick={handlePost}>Опубликовать</button>
+                    <button onClick={handlePost}>Publish</button>
                 </div>
             ) : (
-                <p>Войдите, чтобы публиковать посты</p>
+                <p>Sign in to publish posts</p>
             )}
             <div className="posts">
                 {Array.isArray(posts) && posts.length > 0 ? (
@@ -64,7 +64,7 @@ export default function Home() {
                         <div key={post.id} className="post">{post.content}</div>
                     ))
                 ) : (
-                    <p>Нет постов для отображения.</p>
+                    <p>There are no posts to display.</p>
                 )}
             </div>
         </div>

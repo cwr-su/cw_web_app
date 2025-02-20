@@ -1,0 +1,228 @@
+@import url('theme.css');
+
+.dlg-modal p {
+    font-size: 1.1rem;
+}
+
+.dlg-modal h1 {
+    font-size: 1.25rem;
+    text-align: center;
+    color: var(--txt-text-color-on-modal-window);
+}
+
+.overlay {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.87);
+}
+
+.dlg-modal {
+    box-sizing: border-box;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    left: 50%;
+    z-index: 10;
+    padding: 12px 12px;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.85);
+    padding-bottom: 1.75rem;
+    
+    min-width: 100.25%;
+    min-height: 100.25%;
+    z-index: 999;
+    overflow-y: auto;
+    overflow-x: clip;
+}
+
+.dlg-modal::before {
+    position: absolute;
+	content: "";
+    background: var(--modal-window-background-color);
+	-webkit-backdrop-filter: blur(10px) contrast(100%) saturate(180%);
+	backdrop-filter: saturate(180%) blur(10px) contrast(100%);
+	min-width: 100.25%;
+    min-height: 100.25%;
+	transition: var(--transition-ease-in-out-navbar);
+    top: 0;
+    left: 0;
+}
+
+.dlg-modal-fade {
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dlg-modal-slide {
+    top: -20px;
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);
+    visibility: visible;
+    opacity: 1;
+}
+
+.closer {
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    content: url('/storage/cross.svg');
+    cursor: pointer;
+}
+
+.closer:hover {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+/* animation */
+.fadeIn, .fadeOut, .slideInDown, .slideOutUp {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    opacity: 1;
+    visibility: visible;
+}
+
+.fadeIn::-webkit-scrollbar-thumb {
+    background: var(--bg-color-active-block);
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+@keyframes slideInDown {
+    from {
+        top: -20px;
+        -webkit-transform: translate(-50%, -100%);
+        transform: translate(-50%, -100%);
+    }
+
+    to {
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+}
+
+.slideInDown {
+    -webkit-animation-name: slideInDown;
+    animation-name: slideInDown;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    visibility: visible;
+}
+
+@keyframes slideOutUp {
+    from {
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        top: -20px;
+        -webkit-transform: translate(-50%, -100%);
+        transform: translate(-50%, -100%);
+    }
+}
+
+.slideOutUp {
+    -webkit-animation-name: slideOutUp;
+    animation-name: slideOutUp;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#overlay {
+    min-width: 100%;
+}
+
+.button-submit, button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scrolling-modal {
+    position: relative;
+    transition: var(--transition-ease-in-out-navbar);
+    margin: auto;
+    padding: 0;
+    padding-right: .25rem;
+    max-height: 600px;
+    max-width: 560px;
+}
+
+@media (max-width: 560px) {
+    .scrolling-modal {
+        margin: .25rem .25rem 0 .25rem;
+    }
+}
+
+.inside_modal {
+    padding: 1.45rem;
+}
+
+.error {
+    hyphens: auto;
+    word-break: break-word;
+}
+
+.error.success {
+    color: var(--color-placeholder);
+}
+
+.error code {
+    user-select: all;
+    cursor: pointer;
+}

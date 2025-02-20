@@ -1,0 +1,395 @@
+html {
+    --span-logo-ya: url('/storage/ya/ya_logo.svg');
+    --span-logo-cw-premium-icon: url('/storage/cw_premium/cw_premium_logo.svg');
+    --span-logo-cw-premium-text-logo-icon: url('/storage/carousel/universal-logo-cw-premium.svg');
+    --span-logo-ai-cw-icon: url('/storage/ai_cw/ai_cw_logo.svg');
+    --line-color: #2c3743;
+    --border-radius-button: 15px;
+    --border-radius-input: 15px;
+    --bg-color-for-yandex-button: #414141;
+}
+
+:root[data-color-scheme="default"] {
+    --span-logo-navbar: url('/storage/black-Logo-pen.svg');
+    --bg-color-navbar: rgba(253, 253, 253, 0.765);
+    --navbar-color-link: rgba(137, 37, 168, 0.855);
+    --navbar-color-button-more: rgba(0, 0, 0, .7);
+    --navbar-color-link-after: rgba(0, 0, 0, .95);
+    --navbar-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+
+    --tile-background-color: #f3ebf8;
+
+    --bg-color-active-block: rgba(255, 255, 255, .4);
+    --color-burger-button-of-navbar: #000;
+
+    --span-logo-auth-icon: url('/storage/auth-icon.svg');
+    --span-logo-logout-icon: url('/storage/logout-icon.svg');
+    --span-logo-api-icon: url('/storage/api-icon.svg');
+    --span-logo-docs-icon: url('/storage/docs-icon.svg');
+    --span-logo-from-dev-icon: url('/storage/from-dev-icon.svg');
+    --span-logo-home-icon: url('/storage/home-icon.svg');
+    --span-logo-logout-icon: url('/storage/logout-icon.svg');
+    --span-logo-projects-icon: url('/storage/projects-icon.svg');
+    --span-logo-acdn-icon: url('/storage/acdn-icon.svg');
+    --span-logo-successful-icon: url('/storage/successful-icon.svg');
+    --span-logo-err-cross-icon: url('/storage/cross-error.svg');
+
+    --span-logo-star: url('/storage/star-for-light.svg');
+
+    --span-logo-edit-btn-pen-icon: url('/storage/edit-btn-pen.svg');
+
+    --transition-ease-in-out-navbar: all .3s ease-in-out;
+    --txt-span-color: #1c274c;
+    --span-loader-showmore: #1c274c;
+    --span-loader-showmore-blur: rgba(28, 39, 76, 0.7);
+
+    --avatar-img-logo-navbar: 1px solid #F8F8F8;
+
+    --txt-text-color-on-page: #000;
+    --txt-text-color-on-modal-window: #000;
+    --body-background-color: #f1f1f1;
+    --modal-window-background-color: rgba(255, 255, 255, 0.65);
+    --wrapper-background-color: #FAF9F9;
+    --wrapper-box-shadow: 0 0 2.5px 0 rgba(0, 0, 0, 0.15);
+    --border-color-bottom-navbar: solid rgb(200, 200, 200) .5px;
+
+    --backgroundcolor-code-block: #232323;
+
+    --link-color-on-page: #06c;
+    --link-color-on-page-bottom-after: #3064ff;
+
+    /* Scroll */
+    --scroll-track-color: #eaeaea;
+    --scroll-track-color-hover: #eaeaea;
+    --scroll-buttons-color: #727272;
+    --scroll-bar-color: #557bfa;
+    --scroll-bar-color-hover: #023dff;
+
+    /* Selecting */
+    --selection-bg-color: #a4acec;
+
+    /* preloader */
+    --fg: #19171c;
+    --shade1: #f1eaff;
+    --shade2: #c3bccc;
+    --shade3: #f3ebf8;
+    --shade4: #000000;
+    --dur1: 1s;
+    --dur2: 6s;
+
+    /* Create_Post - Editor */
+    --toolbar-box-editor-hover: #e1e1e1;
+
+    /* Logo Box's span -- url*/
+    --boldbtn: url('https://img.icons8.com/fluency-systems-filled/48/000000/bold.png');
+    --strikebtn: url('https://img.icons8.com/fluency-systems-filled/30/000000/strikethrough.png');
+    --ubtn: url('https://img.icons8.com/fluency-systems-filled/48/000000/underline.png');
+    --ibtn: url('https://img.icons8.com/fluency-systems-filled/48/000000/italic.png');
+
+    --manage-cw-premium-bg-color: linear-gradient(32deg, rgb(177 247 255 / 0.4), rgb(194, 246, 255, 0.6), rgb(186, 128, 255, 0.3), rgb(251, 183, 226, 0.42));
+    --registration-auth-section-input-fields-bg-color: #f1ebff;
+    --reg-auth-shadow: #8f56ab .2px .25px 5px;
+    --color-placeholder: #280f3e;
+
+    --logo-cw-id: url('/storage/cw_id/cw_id_logo_light.svg');
+    --logo-cw-id-only-id-name: url('/storage/cw_id/cw_id_logo_universal_black_only_ID_Name.svg');
+
+    --padding-bottom-for-section-form-block: 1rem;
+
+    /* CW PREMIUM COVER */
+    --cover-cw-premium-benefits: url('/storage/cw_premium/Poster-ADD-CW-Premium-for-site.svg');
+    --cover-cw-premium-benefits-for-mob-devices: url('/storage/cw_premium/Poster-ADD-CW-Premium-for-site-mobile.svg');
+
+    --important-bg-color: #efdbff;
+}
+
+/* White mode */
+@media (prefers-color-scheme: light) {
+    :root[data-color-scheme="default"] {
+        --span-logo-navbar: url('/storage/black-Logo-pen.svg');
+        --bg-color-navbar: rgba(253, 253, 253, 0.765);
+        --navbar-color-link: rgba(137, 37, 168, 0.855);
+        --navbar-color-button-more: rgba(0, 0, 0, .7);
+        --navbar-color-link-after: rgba(0, 0, 0, .95);
+        --navbar-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+
+        --tile-background-color: #f3ebf8;
+
+        --bg-color-active-block: rgba(255, 255, 255, .4);
+        --color-burger-button-of-navbar: #000;
+
+        --span-logo-auth-icon: url('/storage/auth-icon.svg');
+        --span-logo-logout-icon: url('/storage/logout-icon.svg');
+        --span-logo-api-icon: url('/storage/api-icon.svg');
+        --span-logo-docs-icon: url('/storage/docs-icon.svg');
+        --span-logo-from-dev-icon: url('/storage/from-dev-icon.svg');
+        --span-logo-home-icon: url('/storage/home-icon.svg');
+        --span-logo-logout-icon: url('/storage/logout-icon.svg');
+        --span-logo-projects-icon: url('/storage/projects-icon.svg');
+        --span-logo-acdn-icon: url('/storage/acdn-icon.svg');
+        --span-logo-successful-icon: url('/storage/successful-icon.svg');
+        --span-logo-err-cross-icon: url('/storage/cross-error.svg');
+
+        --span-logo-star: url('/storage/star-for-light.svg');
+
+        --span-logo-edit-btn-pen-icon: url('/storage/edit-btn-pen.svg');
+
+        --transition-ease-in-out-navbar: all .3s ease-in-out;
+        --txt-span-color: #1c274c;
+        --span-loader-showmore: #1c274c;
+        --span-loader-showmore-blur: rgba(28, 39, 76, 0.7);
+
+        --avatar-img-logo-navbar: 1px solid #F8F8F8;
+
+        --txt-text-color-on-page: #000;
+        --txt-text-color-on-modal-window: #000;
+        --body-background-color: #f1f1f1;
+        --modal-window-background-color: rgba(255, 255, 255, 0.65);
+        --wrapper-background-color: #FAF9F9;
+        --wrapper-box-shadow: 0 0 2.5px 0 rgba(0, 0, 0, 0.15);
+        --border-color-bottom-navbar: solid rgb(200, 200, 200) .5px;
+
+        --backgroundcolor-code-block: #232323;
+
+        --link-color-on-page: #06c;
+        --link-color-on-page-bottom-after: #3064ff;
+
+        /* Scroll */
+        --scroll-track-color: #eaeaea;
+        --scroll-track-color-hover: #eaeaea;
+        --scroll-buttons-color: #727272;
+        --scroll-bar-color: #557bfa;
+        --scroll-bar-color-hover: #023dff;
+
+        /* Selecting */
+        --selection-bg-color: #a4acec;
+
+        /* preloader */
+        --fg: #19171c;
+        --shade1: #f1eaff;
+        --shade2: #c3bccc;
+        --shade3: #f3ebf8;
+        --shade4: #000000;
+        --dur1: 1s;
+        --dur2: 6s;
+
+        /* Create_Post - Editor */
+        --toolbar-box-editor-hover: #e1e1e1;
+
+        /* Logo Box's span -- url*/
+        --boldbtn: url('https://img.icons8.com/fluency-systems-filled/48/000000/bold.png');
+        --strikebtn: url('https://img.icons8.com/fluency-systems-filled/30/000000/strikethrough.png');
+        --ubtn: url('https://img.icons8.com/fluency-systems-filled/48/000000/underline.png');
+        --ibtn: url('https://img.icons8.com/fluency-systems-filled/48/000000/italic.png');
+
+        --registration-auth-section-bg-color: linear-gradient(rgba(140, 0, 255, 0), rgba(220, 214, 226, 0.8));
+        --manage-cw-premium-bg-color: linear-gradient(32deg, rgb(177 247 255 / 0.4), rgb(194, 246, 255, 0.6), rgb(186, 128, 255, 0.3), rgb(251, 183, 226, 0.42));
+        --registration-auth-section-input-fields-bg-color: #f1ebff;
+        --reg-auth-shadow: #8f56ab .2px .25px 5px;
+        --color-placeholder: #280f3e;
+
+        --logo-cw-id: url('/storage/cw_id/cw_id_logo_light.svg');
+        --logo-cw-id-only-id-name: url('/storage/cw_id/cw_id_logo_universal_black_only_ID_Name.svg');
+
+        --padding-bottom-for-section-form-block: 1rem;
+
+        /* CW PREMIUM COVER */
+        --cover-cw-premium-benefits: url('/storage/cw_premium/Poster-ADD-CW-Premium-for-site.svg');
+        --cover-cw-premium-benefits-for-mob-devices: url('/storage/cw_premium/Poster-ADD-CW-Premium-for-site-mobile.svg');
+
+        --important-bg-color: #efdbff;
+    }
+}
+
+/* Dark mode */
+:root[data-color-scheme="dark"] {
+    --span-logo-navbar: url('/storage/white-Logo-pen.svg');
+    --bg-color-navbar: rgba(0, 0, 0, 0.765);
+    --navbar-color-link: rgba(245, 208, 255, 0.885);
+    --navbar-color-button-more: rgba(255, 255, 255, .7);
+    --navbar-color-link-after: rgba(255, 255, 255, .95);
+    --navbar-box-shadow: 0 0 8px 0 rgba(255, 255, 255, 0.15);
+
+    --tile-background-color: #2f1f43;
+
+    --bg-color-active-block: rgba(0, 0, 0, .4);
+    --color-burger-button-of-navbar: #fff;
+
+    --span-logo-auth-icon: url('/storage/auth-icon-for-dark.svg');
+    --span-logo-logout-icon: url('/storage/logout-icon-for-dark.svg');
+    --span-logo-api-icon: url('/storage/api-icon-for-dark.svg');
+    --span-logo-docs-icon: url('/storage/docs-icon-for-dark.svg');
+    --span-logo-from-dev-icon: url('/storage/from-dev-icon-for-dark.svg');
+    --span-logo-home-icon: url('/storage/home-icon-for-dark.svg');
+    --span-logo-logout-icon: url('/storage/logout-icon-for-dark.svg');
+    --span-logo-projects-icon: url('/storage/projects-icon-for-dark.svg');
+    --span-logo-acdn-icon: url('/storage/acdn-icon-for-dark.svg');
+    --span-logo-successful-icon: url('/storage/successful-icon-for-dark.svg');
+    --span-logo-err-cross-icon: url('/storage/cross-error-for-dark.svg');
+
+    --span-logo-star: url('/storage/star-for-dark.svg');
+
+    --span-logo-edit-btn-pen-icon: url('/storage/edit-btn-pen-for-dark.svg');
+
+    --transition-ease-in-out-navbar: all .3s ease-in-out;
+    --txt-span-color: #d2d4dc;
+    --span-loader-showmore: #d2d4dc;
+    --span-loader-showmore-blur: rgba(210, 212, 220, 0.7);
+
+    --avatar-img-logo-navbar: 1px solid rgba(0, 0, 0, .1);
+
+    --txt-text-color-on-page: #fff;
+    --txt-text-color-on-modal-window: #dcdbdc;
+    --body-background-color: rgb(9, 8, 8);
+    --modal-window-background-color: rgba(0, 0, 0, 0.65);
+    --wrapper-background-color: #191919;
+    --wrapper-box-shadow: 0 0 2.5px 0 rgba(255, 255, 255, 0.15);
+    --border-color-bottom-navbar: solid rgb(50, 50, 50) .5px;
+
+    --backgroundcolor-code-block: #343434;
+
+    --link-color-on-page: rgb(120, 187, 255);
+    --link-color-on-page-bottom-after: rgb(130, 190, 255);
+
+    /* Scroll */
+    --scroll-track-color: #F5F5F5;
+    --scroll-track-color-hover: #F5F5F5;
+    --scroll-buttons-color: #b6b6b6;
+    --scroll-bar-color: #557bfa;
+    --scroll-bar-color-hover: #023dff;
+
+    /* Selecting */
+    --selection-bg-color: #a4acec;
+
+    /* preloader */
+    --fg: #17181c;
+    --shade1: #24003f;
+    --shade2: #cccdd1;
+    --shade3: #f3f4f8;
+    --shade4: #ffffff;
+    --dur1: 1s;
+    --dur2: 6s;
+
+    /* Create_Post - Editor */
+    --toolbar-box-editor-hover: #1e1e1e;
+
+    /* Logo Box's span -- url*/
+    --boldbtn: url('https://img.icons8.com/fluency-systems-filled/48/e1e1e1/bold.png');
+    --strikebtn: url('https://img.icons8.com/fluency-systems-filled/30/e1e1e1/strikethrough.png');
+    --ubtn: url('https://img.icons8.com/fluency-systems-filled/48/e1e1e1/underline.png');
+    --ibtn: url('https://img.icons8.com/fluency-systems-filled/48/e1e1e1/italic.png');
+
+    --registration-auth-section-bg-color: linear-gradient(rgba(140, 0, 255, 0), rgba(55, 27, 78, 0.796));
+    --manage-cw-premium-bg-color: linear-gradient(32deg, rgb(11, 222, 246, 0.45), rgb(0, 217, 255, 0.4), rgb(141, 72, 222, 0.46), rgb(255, 0, 161, 0.54));
+    --registration-auth-section-input-fields-bg-color: #3a3347;
+    --reg-auth-shadow: #8f56ab .2px .25px 5px;
+    --color-placeholder: #efdeff;
+
+    --logo-cw-id: url('/storage/cw_id/cw_id_logo_for_dark.svg');
+    --logo-cw-id-only-id-name: url('/storage/cw_id/cw_id_logo_universal_white_only_ID_Name.svg');
+
+    --padding-bottom-for-section-form-block: 1rem;
+
+    /* CW PREMIUM COVER */
+    --cover-cw-premium-benefits: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site.svg');
+    --cover-cw-premium-benefits-for-mob-devices: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site-mobile.svg');
+    --important-bg-color: #9f56ca;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    :root[data-color-scheme="dark"],
+    :root {
+        --span-logo-navbar: url('/storage/white-Logo-pen.svg');
+        --bg-color-navbar: rgba(0, 0, 0, 0.765);
+        --navbar-color-link: rgba(245, 208, 255, 0.885);
+        --navbar-color-button-more: rgba(255, 255, 255, .7);
+        --navbar-color-link-after: rgba(255, 255, 255, .95);
+        --navbar-box-shadow: 0 0 8px 0 rgba(255, 255, 255, 0.15);
+
+        --tile-background-color: #2f1f43;
+
+        --bg-color-active-block: rgba(0, 0, 0, .4);
+        --color-burger-button-of-navbar: #fff;
+
+        --span-logo-auth-icon: url('/storage/auth-icon-for-dark.svg');
+        --span-logo-logout-icon: url('/storage/logout-icon-for-dark.svg');
+        --span-logo-api-icon: url('/storage/api-icon-for-dark.svg');
+        --span-logo-docs-icon: url('/storage/docs-icon-for-dark.svg');
+        --span-logo-from-dev-icon: url('/storage/from-dev-icon-for-dark.svg');
+        --span-logo-home-icon: url('/storage/home-icon-for-dark.svg');
+        --span-logo-logout-icon: url('/storage/logout-icon-for-dark.svg');
+        --span-logo-projects-icon: url('/storage/projects-icon-for-dark.svg');
+        --span-logo-acdn-icon: url('/storage/acdn-icon-for-dark.svg');
+        --span-logo-successful-icon: url('/storage/successful-icon-for-dark.svg');
+        --span-logo-err-cross-icon: url('/storage/cross-error-for-dark.svg');
+
+        --span-logo-star: url('/storage/star-for-dark.svg');
+
+        --span-logo-edit-btn-pen-icon: url('/storage/edit-btn-pen-for-dark.svg');
+
+        --transition-ease-in-out-navbar: all .3s ease-in-out;
+        --txt-span-color: #d2d4dc;
+        --span-loader-showmore: #d2d4dc;
+        --span-loader-showmore-blur: rgba(210, 212, 220, 0.7);
+
+        --avatar-img-logo-navbar: 1px solid rgba(0, 0, 0, .1);
+
+        --txt-text-color-on-page: #fff;
+        --txt-text-color-on-modal-window: #dcdbdc;
+        --body-background-color: rgb(9, 8, 8);
+        --modal-window-background-color: rgba(0, 0, 0, 0.65);
+        --wrapper-background-color: #191919;
+        --wrapper-box-shadow: 0 0 2.5px 0 rgba(255, 255, 255, 0.15);
+        --border-color-bottom-navbar: solid rgb(50, 50, 50) .5px;
+
+        --backgroundcolor-code-block: #343434;
+
+        --link-color-on-page: rgb(120, 187, 255);
+        --link-color-on-page-bottom-after: rgb(130, 190, 255);
+
+        /* Scroll */
+        --scroll-track-color: #F5F5F5;
+        --scroll-track-color-hover: #F5F5F5;
+        --scroll-buttons-color: #b6b6b6;
+        --scroll-bar-color: #557bfa;
+        --scroll-bar-color-hover: #023dff;
+
+        /* Selecting */
+        --selection-bg-color: #a4acec;
+
+        /* preloader */
+        --fg: #17181c;
+        --shade1: #24003f;
+        --shade2: #cccdd1;
+        --shade3: #f3f4f8;
+        --shade4: #ffffff;
+        --dur1: 1s;
+        --dur2: 6s;
+
+        /* Create_Post - Editor */
+        --toolbar-box-editor-hover: #1e1e1e;
+
+        /* Logo Box's span -- url*/
+        --boldbtn: url('https://img.icons8.com/fluency-systems-filled/48/e1e1e1/bold.png');
+        --strikebtn: url('https://img.icons8.com/fluency-systems-filled/30/e1e1e1/strikethrough.png');
+        --ubtn: url('https://img.icons8.com/fluency-systems-filled/48/e1e1e1/underline.png');
+        --ibtn: url('https://img.icons8.com/fluency-systems-filled/48/e1e1e1/italic.png');
+
+        --registration-auth-section-bg-color: linear-gradient(rgba(140, 0, 255, 0), rgba(55, 27, 78, 0.796));
+        --manage-cw-premium-bg-color: linear-gradient(32deg, rgb(11, 222, 246, 0.45), rgb(0, 217, 255, 0.4), rgb(141, 72, 222, 0.46), rgb(255, 0, 161, 0.54));
+        --registration-auth-section-input-fields-bg-color: #3a3347;
+        --reg-auth-shadow: #8f56ab .2px .25px 5px;
+        --color-placeholder: #efdeff;
+
+        --logo-cw-id: url('/storage/cw_id/cw_id_logo_for_dark.svg');
+        --logo-cw-id-only-id-name: url('/storage/cw_id/cw_id_logo_universal_white_only_ID_Name.svg');
+
+        --padding-bottom-for-section-form-block: 1rem;
+
+        /* CW PREMIUM COVER */
+        --cover-cw-premium-benefits: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site.svg');
+        --cover-cw-premium-benefits-for-mob-devices: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site-mobile.svg');
+        --important-bg-color: #9f56ca;
+    }
+}

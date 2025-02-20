@@ -1,0 +1,79 @@
+@import url('theme.css');
+
+
+@-webkit-keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(calc(-250px * 7));
+	}
+}
+
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(calc(-250px * 7));
+	}
+}
+
+.slider {
+	height: 0;
+	margin: auto;
+	overflow: hidden;
+	position: relative;
+	width: 0;
+	border-radius: 36px;
+}
+.slider.show {
+	width: 94%;
+	height: 100px;
+}
+
+.slider::before {
+	background: linear-gradient(to right, var(--bg-color-navbar) 0%, rgba(255, 255, 255, 0) 100%);
+	content: "";
+	height: 100px;
+	position: absolute;
+	width: 200px;
+	z-index: 2;
+}
+.slider::after {
+	background: linear-gradient(to right, var(--bg-color-navbar) 0%, rgba(255, 255, 255, 0) 100%);
+	content: "";
+	height: 100px;
+	position: absolute;
+	width: 200px;
+	z-index: 2;
+}
+
+.slider::after {
+	right: 0;
+	top: 0;
+	transform: rotateZ(180deg);
+}
+
+.slider::before {
+	left: 0;
+	top: 0;
+}
+
+.slider.show .slide-track {
+	-webkit-animation: scroll 40s linear infinite;
+	animation: scroll 40s linear infinite;
+	display: flex;
+	width: calc(250px * 12);
+}
+.slider .slide-track {
+	-webkit-animation: none;
+	animation: none;
+}
+
+.slider .slide {
+	height: 100px;
+	width: 250px;
+}

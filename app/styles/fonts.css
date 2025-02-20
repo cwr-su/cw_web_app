@@ -1,0 +1,72 @@
+@import url('theme.css');
+
+@font-face {
+	font-family: "Stem-Regular";
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url("../fonts/stem/Stem-Regular-TW.woff2") format("woff2"),
+		url("../fonts/stem/Stem-Regular-TW.woff") format("woff");
+}
+
+@font-face {
+	font-family: "Stem-Medium";
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url("../fonts/stem/Stem-Medium-TW.woff2") format("woff2"),
+		url("../fonts/stem/Stem-Medium-TW.woff") format("woff");
+}
+
+@font-face {
+	font-family: "Stem-Bold";
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url("../fonts/stem/Stem-Bold-TW.woff2") format("woff2"),
+		url("../fonts/stem/Stem-Bold-TW.woff") format("woff");
+}
+
+a, p {
+	font-size: 1.25rem;
+	color: var(--txt-text-color-on-page);
+}
+
+a {
+	color: var(--navbar-color-link);
+	opacity: 1;
+	text-decoration: none;
+
+	&:hover {
+		opacity: 0.85;
+	}
+}
+
+a:active {
+	color: var(--navbar-color-link-after);
+}
+
+h3, h2 {
+	padding: .85rem;
+	color: var(--txt-text-color-on-page);
+}
+
+section p {
+	padding: .35rem 0;
+}
+
+.footnote-section {
+	margin-top: 2rem;
+}
+
+.footnote-section p,
+.footnote-section p a,
+.footnote {
+	font-size: 1rem;
+}
+
+.hr-through-sections {
+	width: 85%;
+	border-radius: 50%;
+	margin: 1rem 0;
+}

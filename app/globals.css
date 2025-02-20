@@ -42,7 +42,7 @@ a {
 } */
 
 /* 🌟 Общие стили */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -52,10 +52,10 @@ a {
 body {
     background-color: #f8f9fa;
     color: #333;
-}
+} */
 
 /* страничные - стили */
-.feed, .profile, .auth-container {
+/* .feed, .profile, .auth-container {
     position: relative;
     top: 110px;
     max-width: 1250px;
@@ -67,7 +67,7 @@ body {
 }
 
 /* 📌 Контейнер страницы */
-main {
+/* main {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
@@ -75,10 +75,10 @@ main {
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-}
+} */
 
 /* 🔗 Навигация */
-.wrap_navigation_bar {
+/* .wrap_navigation_bar {
     display: flex;
     justify-content: center;
     position: relative;
@@ -160,10 +160,10 @@ a:hover {
 .navbar a.active {
     background: #007aff;
     color: white;
-}
+} */
 
 /* 📝 Карточки постов */
-.post {
+/* .post {
     background: white;
     padding: 15px;
     border-radius: 18px;
@@ -174,10 +174,10 @@ a:hover {
 
 .post:hover {
     transform: translateY(-2px);
-}
+} */
 
 /* 🔘 Кнопка */
-button {
+/* button {
     background: #007aff;
     color: white;
     border: none;
@@ -190,7 +190,7 @@ button {
 
 button:hover {
     background: #005ecb;
-}
+} */
 
 /* ✏️ Стили для input (whats_new) */
 /* input.whats_new {
@@ -210,7 +210,7 @@ input.whats_new:focus {
     box-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
 } */
 /* Стили для textarea */
-.whats_new {
+/* .whats_new {
     width: 100%;
     background-color: #f7f7f7;
     font-size: 16px;
@@ -226,14 +226,15 @@ input.whats_new:focus {
 }
 
 /* Убираем границу при фокусе */
-.whats_new:focus {
+/*.whats_new:focus {
     background-color: #ffffff;
     border-color: #007aff;
     box-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
     transition: all 0.3s ease;
-}
+}*/
 
 /* Плавное изменение размера textarea */
+/*
 .whats_new {
     transition: height 0.2s ease-out;
 }
@@ -347,4 +348,4 @@ button:hover {
 .posts {
     margin-top: 15px;
     cursor: pointer;
-}
+} */

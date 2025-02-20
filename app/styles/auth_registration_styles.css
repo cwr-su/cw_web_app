@@ -1,0 +1,274 @@
+@import url('theme.css');
+
+.registration, .auth, .verify-email, .forgot_password, .my_page, .manage_my_cwpremium {
+    background: var(--wrapper-background-color);
+    border-radius: 30px;
+    padding: 1rem 1.25rem var(--padding-bottom-for-section-form-block) 1.25rem;
+    transition: var(--transition-ease-in-out-navbar);
+}
+
+footer {
+    margin-top: 25px;
+}
+
+.auth, .registration, .verify-email, .forgot_password {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.manage_my_cwpremium {
+    background: var(--manage-cw-premium-bg-color);
+}
+
+.input-box input {
+    margin: .3rem 0;
+    cursor: pointer;
+    width: 18rem;
+    font-family: "Stem-Regular", arial, sans-serif;
+    color: var(--txt-text-color-on-page);
+    box-shadow: var(--reg-auth-shadow);
+    transition: 0.2s ease-out;
+    font-size: inherit;
+
+    &:focus {
+        border: solid #9e7bdb .000025px;
+        outline: 0;
+    }
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--registration-auth-section-input-fields-bg-color);
+    border: solid var(--registration-auth-section-input-fields-bg-color) .000025px;
+    border-radius: var(--border-radius-input);
+    width: 100%;
+}
+
+.input-box.button-submit,
+.input-box.model_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-box {
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.recovery-btn {
+    margin-top: 20px;
+}
+
+.form_input_box_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form_input_box_title {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: var(--color-placeholder);
+    user-select: none;
+}
+
+.form_input_box_title a {
+    font-size: 1rem;
+}
+
+::placeholder {
+    color: var(--color-placeholder);
+    font-size: 1rem;
+}
+
+.registration h3,
+.auth h3,
+.verify-email h3,
+.forgot_password h3,
+.my_page h3,
+.manage_my_cwpremium h3 {
+    text-align: center;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    padding: 0;
+}
+
+input[type="submit"], input[type="button"] {
+    padding: .75rem 2rem;
+    text-align: center;
+    background-color: var(--registration-auth-section-input-fields-bg-color);
+    border: solid var(--registration-auth-section-input-fields-bg-color) .000025px;
+    border-radius: var(--border-radius-button);
+    color: var(--color-placeholder);
+    font-weight: 700;
+    font-size: 1rem;
+    width: 10rem;
+}
+
+.button-submit input[type="submit"], 
+.button-submit input[type="button"] {
+    width: 100%;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: var(--body-background-color);
+}
+
+.error {
+    font-size: 1rem;
+    text-align: center;
+    color: var(--navbar-color-link);
+    font-weight: 900;
+}
+
+#error-message {
+    padding: 0;
+}
+.error-message {
+    margin-top: 25px;
+}
+
+.policy {
+    margin-top: 25px;
+}
+
+.policy h3,
+.policy h3 a {
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.span-logo-cw-id {
+    display: block;
+}
+
+.logo-cw-id, .logo-ya, .hr-for-other-methods, .already-or-not-reg-auth-txt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    user-select: none;
+}
+
+.logo-ya-block {
+    border-radius: 15px;
+    background-color: var(--bg-color-for-yandex-button);
+    padding: .25rem 0;
+}
+
+.hr-for-other-methods {
+    margin: 25px 0;
+}
+
+.hr-for-other-methods p {
+    padding: 0 8px;
+    background: var(--wrapper-background-color);
+    z-index: 1;
+}
+
+.hr-for-other-methods::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--line-color);
+}
+
+.logo-cw-id {
+    margin: .75rem 0 1rem 0;
+}
+
+.span-logo-cw-id {
+    width: 185px;
+    height: 60px;
+}
+
+.span-logo-cw-id::before {
+    content: "";
+
+    background-image: var(--logo-cw-id);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    transition: var(--transition-ease-in-out-navbar);
+
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.span-logo-ya {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.span-logo-ya::before {
+    content: "";
+
+    background-image: var(--span-logo-ya);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    transition: var(--transition-ease-in-out-navbar);
+
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.already-or-not-reg-auth-txt {
+    padding: 0;
+    margin: 0;
+}
+
+.already-or-not-reg-auth-txt p {
+    text-align: center;
+    font-size: 1rem;
+    padding: 0;
+    margin: 1rem 0 0 0;
+}
+.already-or-not-reg-auth-txt p a {
+    font-size: 1rem;
+}
+
+/* verify page css */
+#button_send_code_again {
+    width: 12rem;
+    padding: .25rem;
+    font-size: 1;
+}
+
+/* set a new password css */
+#change_password_btn {
+    width: 12rem;
+    padding: .75rem 1rem;
+}
+
+p a {
+    font-size: 1.1rem;
+}
+
+.page {
+    min-width: 595px;
+}
+
+@media screen and (max-width: 630px) {
+    .page {
+        min-width: 300px;
+    }
+}
+
+.page {
+    background: var(--body-background-color);
+    border: none;
+    box-shadow: unset;
+    padding: 0;
+}

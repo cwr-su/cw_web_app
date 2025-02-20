@@ -1,0 +1,37 @@
+@import url('theme.css');
+
+body.loading {
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.preloader_of_all_pages {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: var(--shade1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.preloader_of_all_pages .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--shade4);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
