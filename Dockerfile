@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Устанавливаем зависимости
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps --max-old-space-size=4096
 
 # Копируем весь код в контейнер
 COPY . .
