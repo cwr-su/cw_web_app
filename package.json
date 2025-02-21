@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently \"next dev\" \"npx ngrok http 3000 --log=stdout\"",
     "build": "npm run prisma:generate && next build",
     "prisma:generate": "prisma generate",
     "vercel-build": "npm run prisma:generate && next build",
@@ -15,11 +15,13 @@
     "@shadcn/ui": "^0.0.4",
     "axios": "^1.7.9",
     "bcryptjs": "^3.0.0",
+    "cookies-next": "^5.1.0",
     "framer-motion": "^12.4.3",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.12.0",
     "next": "15.1.7",
     "next-auth": "^4.24.11",
+    "ngrok": "^5.0.0-beta.2",
     "prisma": "^6.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.7"
   }
