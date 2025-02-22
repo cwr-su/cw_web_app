@@ -3,12 +3,23 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
+
+import { YandexLoginLinkGenerate } from "../components/YandexLoginLinkGenerate";
+import YandexLoginLink from "../components/YandexLoginLink";
 
 import "../styles/auth_preloader.css";
 import "../styles/auth_registration_styles.css";
 
 export default function LoginPage() {
-    const [form, setForm] = useState({ username: "", password: "" });
+    const [authUrl, setAuthUrl] = useState("");
+
+    useEffect(() => {
+        const { authUrl } = YandexLoginLinkGenerate();
+        setAuthUrl(authUrl);
+    }, []);
+
+    const [form, setForm] = useState({ login: "", password: "" });
     const [errorLogin, setErrorLogin] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
 
@@ -86,8 +97,8 @@ export default function LoginPage() {
                     </div>
                     <input
                         type="text"
-                        name="username"
-                        value={form.username}
+                        name="login"
+                        value={form.login}
                         onChange={handleChange}
                         required
                         disabled={loadingFirst & loadingSecond}
@@ -148,16 +159,11 @@ export default function LoginPage() {
                 </div>
 
                 <div className="logo-ya-block">
-                    <a href='https://yandex.ru'>
-                        <div className="logo-ya">
-                            <span className='span-logo-ya'></span>
-
-                        </div>
-                    </a>
+                    <YandexLoginLink authUrl={authUrl} />
                 </div>
 
                 <div className="already-or-not-reg-auth-txt">
-                    <p>No account? <a href="/register">Sign up</a></p>
+                    <p>No account? <Link href="/register">Sign up</Link></p>
                 </div>
 
             </form>

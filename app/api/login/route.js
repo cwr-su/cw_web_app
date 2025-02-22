@@ -7,26 +7,28 @@ const secret = process.env.JWT_SECRET || "2e1fbd3222815089d9cd39d63654a2c053285a
 
 export async function POST(req) {
     try {
-        const { username, password } = await req.json();
+        const { login, password } = await req.json();
 
-        const user = await prisma.user.findUnique({ where: { username } });
+        const user = await prisma.users.findUnique({ where: { email } });
 
         if (!user) {
-            console.log("User not found:", username);
+            console.log("User not found:", login);
             return new Response(JSON.stringify({ error: "login" }), { status: 401 });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            console.log("Invalid credentials for user:", username);
+            console.log("Invalid credentials for user:", login);
             return new Response(JSON.stringify({ error: "password" }), { status: 401 });
         }
 
-        const token = jwt.sign({ id: user.id, username: user.username }, secret, {
-            expiresIn: "1h",
-        });
+        const token = jwt.sign(
+            { id: user.id, login: user.login }, secret, {
+            expiresIn: "24h",
+        }
+        );
 
-        console.log("User logged in:", username);
+        console.log("User logged in:", login);
         return new Response(JSON.stringify({ token }), { status: 200 });
     } catch (error) {
         console.error("Login error:", error);

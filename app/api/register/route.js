@@ -1,41 +1,67 @@
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { PrismaClient } from "@prisma/client";
 
-// export const dynamic = "force-static";
-// export const revalidate = 10;
+import { sendVerificationEmail } from "../../components/senderEMails/VerificationCodeSendFromReg";
 
 const prisma = new PrismaClient();
 
+function generateVerificationCode() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
 export async function POST(req) {
     try {
-        const { username, email, password } = await req.json();
+        const { firstname, lastname, login, email, password1, password2 } = await req.json();
 
-        if (!username || !email || !password) {
-            return new Response(JSON.stringify({ error: "Заполните все поля" }), { status: 400 });
+        if (!firstname || !lastname || !login || !email || !password1 || !password2) {
+            return new Response(JSON.stringify({ error: "Fill in all fields!", fieldNameErr: "emptyFileds" }), { status: 400 });
         }
 
-        // Проверяем, существует ли уже пользователь по EMail
-        const existingUserEMail = await prisma.user.findUnique({ where: { email } });
+        const existingUserEMail = await prisma.users.findUnique({ where: { email } });
         if (existingUserEMail) {
-            return new Response(JSON.stringify({ error: "Пользователь с таким EMail уже существует" }), { status: 400 });
+            return new Response(JSON.stringify({ error: "A user with this EMail already exists", fieldNameErr: "email" }), { status: 400 });
         }
 
-        const existingUserLogin = await prisma.user.findUnique({ where: { username } });
+        const existingUserLogin = await prisma.users.findUnique({ where: { login } });
         if (existingUserLogin) {
-            return new Response(JSON.stringify({ error: "Пользователь с таким логином уже существует" }), { status: 400 });
+            return new Response(JSON.stringify({ error: "A user with this login already exists", fieldNameErr: "login" }), { status: 400 });
         }
 
-        // Хешируем пароль
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password1, 10);
 
-        // Создаём пользователя в базе
-        const newUser = await prisma.user.create({
-            data: { username: username, email: email, password: hashedPassword },
+        const verifyCode = generateVerificationCode();
+
+        await prisma.users.create({
+            data: {
+                firstname: firstname,
+                lastname: lastname,
+                login: login,
+                email: email,
+                password: hashedPassword,
+                verifyCode: verifyCode
+            },
         });
 
-        return new Response(JSON.stringify({ message: "Регистрация успешна!" }), { status: 201 });
+        const user = await prisma.users.findUnique({ where: { email } });
+
+        await prisma.premiumobj.create({
+            data: {
+                userId: user.id
+            },
+        });
+
+        const token = jwt.sign(
+            { id: user.id, login: user.login }, process.env.JWT_SECRET, {
+            expiresIn: "24h",
+        });
+        const isNewUser = true;
+
+        await sendVerificationEmail(email, firstname, verifyCode, req);
+
+        return new Response(JSON.stringify({ message: "Sign up successful! Verification code sent", token, isNewUser }), { status: 201 });
     } catch (error) {
-        console.error("Ошибка регистрации:", error);
-        return new Response(JSON.stringify({ error: "Ошибка на сервере" }), { status: 500 });
+        console.error("Sign up error: ", error);
+        return new Response(JSON.stringify({ error: "Server error!" }), { status: 500 });
     }
 }

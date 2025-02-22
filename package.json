@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\" \"npx ngrok http 3000 --log=stdout\"",
+    "dev": "next dev",
     "build": "npm run prisma:generate && next build",
     "prisma:generate": "prisma generate",
     "vercel-build": "npm run prisma:generate && next build",
@@ -22,10 +22,12 @@
     "next": "15.1.7",
     "next-auth": "^4.24.11",
     "ngrok": "^5.0.0-beta.2",
+    "nodemailer": "^6.10.0",
     "prisma": "^6.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwindcss": "^4.0.6"
+    "tailwindcss": "^4.0.6",
+    "ua-parser-js": "^2.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

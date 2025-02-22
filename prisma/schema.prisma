@@ -13,18 +13,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int     @id @default(autoincrement())
-  username String  @unique
-  email    String  @unique
-  password String
-  posts    Post[]  // связь с постами
+model Users {
+  id             Int          @id @default(autoincrement())
+  firstname      String       @db.VarChar(200)
+  lastname       String       @db.VarChar(200)
+  login          String       @unique @db.VarChar(200)
+  email          String       @unique
+  password       String
+  verifyCode     String       @default("null")
+  methodOfReg    String       @default("cw_id")
+  avatar         String       @default("none")
+  avatarFileName String       @default("none")
+  premiumobj     Premiumobj[]
+  licences       Licences[]
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  content   String   @db.Text  // Изменяем на тип TEXT
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id]) // связь с User
-  createdAt DateTime @default(now())
+model Premiumobj {
+  id                    Int    @id @default(autoincrement())
+  userId                Int
+  user                  Users  @relation(fields: [userId], references: [id])
+  userCwPremium         String @default("none") @db.VarChar(200)
+  userMCWTgId           String @default("none") @db.VarChar(200)
+  costFloatStr          String @default("none") @db.VarChar(200)
+  paymentId             String @default("none") @db.VarChar(200)
+  paidSuccessVerifiedAt String @default("none")
+}
+
+model Licences {
+  id         Int    @id @default(autoincrement())
+  userId     Int
+  user       Users  @relation(fields: [userId], references: [id])
+  licenceKey String @db.VarChar(200)
+  botId      String @default("none") @db.VarChar(200)
 }
