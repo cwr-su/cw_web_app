@@ -9,7 +9,7 @@ export async function POST(req) {
     try {
         const { login, password } = await req.json();
 
-        const user = await prisma.users.findUnique({ where: { email } });
+        const user = await prisma.users.findUnique({ where: { login } });
 
         if (!user) {
             console.log("User not found:", login);
