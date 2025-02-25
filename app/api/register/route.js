@@ -3,12 +3,9 @@ import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 
 import { sendVerificationEmail } from "../../components/senderEMails/VerificationCodeSendFromReg";
+import { generateVerificationCode } from "../../components/generateVerificationCode";
 
 const prisma = new PrismaClient();
-
-function generateVerificationCode() {
-    return Math.floor(100000 + Math.random() * 900000).toString();
-}
 
 export async function POST(req) {
     try {
@@ -30,7 +27,7 @@ export async function POST(req) {
 
         const hashedPassword = await bcrypt.hash(password1, 10);
 
-        const verifyCode = generateVerificationCode();
+        const verifyCode = await generateVerificationCode();
 
         await prisma.users.create({
             data: {

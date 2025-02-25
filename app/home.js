@@ -1,14 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 import "./globals.css";
 import { getCookie } from "cookies-next/client";
 
 export default function Home() {
-    const [user, setUser] = useState(null);
-    const [content, setContent] = useState("");
-    const [posts, setPosts] = useState([]);
+    // const [user, setUser] = useState(null);
+    // const [content, setContent] = useState("");
+    // const [posts, setPosts] = useState([]);
     const [isSetTGCookie, setTGCookie] = useState(false);
     const [parsedUserDataObj, setParsedUserData] = useState(null);
 
@@ -31,36 +32,36 @@ export default function Home() {
                 .then((res) => setUser(res.data.user))
                 .catch(() => setUser(null));
         }
-        fetchPosts();
+        // fetchPosts();
     }, []);
 
-    const fetchPosts = async () => {
-        try {
-            const res = await axios.get("/api/posts");
-            setPosts(res.data);
-        } catch (error) {
-            console.error("Error loading posts:", error);
-        }
-    };
+    // const fetchPosts = async () => {
+    //     try {
+    //         const res = await axios.get("/api/posts");
+    //         setPosts(res.data);
+    //     } catch (error) {
+    //         console.error("Error loading posts:", error);
+    //     }
+    // };
 
-    const handlePost = async () => {
-        if (!content.trim()) return;
+    // const handlePost = async () => {
+    //     if (!content.trim()) return;
 
-        const token = localStorage.getItem("token");
-        try {
-            await axios.post("/api/posts", { content }, { headers: { Authorization: `Bearer ${token}` } });
-            setContent("");
-            fetchPosts();
-        } catch (error) {
-            console.error("Error when publishing a post:", error);
-        }
-    };
+    //     const token = localStorage.getItem("token");
+    //     try {
+    //         await axios.post("/api/posts", { content }, { headers: { Authorization: `Bearer ${token}` } });
+    //         setContent("");
+    //         fetchPosts();
+    //     } catch (error) {
+    //         console.error("Error when publishing a post:", error);
+    //     }
+    // };
 
     return (
         <section className="my_page">
             <div className="feed">
-                <h1>Лента</h1>
-                {isSetTGCookie ? (
+                <h1>CW | WEBAPP | Pre-Production version 0.0.1</h1>
+                <p>(Log in with telegram: <Link href="/tg"><span>CLICK HERE</span></Link>.)</p><p>Person: </p>{isSetTGCookie ? (
                     <div>
                         <p>Welcome, {parsedUserDataObj.first_name} {parsedUserDataObj.last_name}</p>
                         <p>Username: {parsedUserDataObj.username}</p>
@@ -72,7 +73,7 @@ export default function Home() {
 
                 <hr></hr>
 
-                {user ? (
+                {/* {user ? (
                     <div>
                         <textarea
                             className="whats_new"
@@ -93,7 +94,7 @@ export default function Home() {
                     ) : (
                         <p>There are no posts to display.</p>
                     )}
-                </div>
+                </div> */}
             </div>
         </section>
     );
