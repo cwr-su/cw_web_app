@@ -50,7 +50,7 @@ export async function POST(req) {
 
         const token = jwt.sign(
             { id: user.id, login: user.login }, process.env.JWT_SECRET, {
-            expiresIn: "24h",
+            expiresIn: process.env.HOURS_EXPIRES_TOKEN,
         });
         const isNewUser = true;
 

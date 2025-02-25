@@ -27,7 +27,7 @@ async function EMailCodeBuilder({ email, titleHTML, EMAILContent, details = fals
         ${EMAILContent}
         <div class="details">
             <p>Details:</p>
-            <p>⌚ / 📅 Time and date of verify-code request (by CW system): ${userDetailsJSON.date} at ${userDetailsJSON.time}.
+            <p>⌚ / 📅 Time and date: ${userDetailsJSON.date} at ${userDetailsJSON.time}.
             <br/>📍 IP-Address: ${userDetailsJSON.ip}.
             <br/>🏞 GEO-Data: ${userDetailsJSON.location}.
             <br/>💻 Operating system: ${userDetailsJSON.os}.

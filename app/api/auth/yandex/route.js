@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
-import { generateVerificationCode } from "../../../components/generateVerificationCode";
+import { NotifyYandexLogIn } from "../../../components/senderEMails/NotifyYandexLogIn";
 import axios from "axios";
 
 const CLIENT_ID = process.env.YANDEX_CLIENT_ID;
@@ -65,51 +65,46 @@ export async function GET(req) {
 
         const existingUserLogin = await prisma.users.findUnique({ where: { login } });
         if (existingUserLogin) {
-
-
-            // TO DO: ADD CHANGE EMAIL BY THIS EXISTING LOGIN (IF EXISTS!!!)
-            //                                     ELSE:
-            //        ADD ACTIVATE NEW SESSION BY JWT TOKEN.
-
-
-            return NextResponse.redirect(`${process.env.SITE_URL}`);
+            if (existingUserLogin.email != userInfo.email) {
+                await prisma.users.update({
+                    where: { id: existingUserLogin.id },
+                    data: {
+                        email: userInfo.email,
+                        methodOfReg: "ya_oauth"
+                    },
+                });
+            }
         } else {
+            await prisma.users.create({
+                data: {
+                    firstname: firstname,
+                    lastname: lastname,
+                    login: login,
+                    email: email,
+                    password: `yandex_id_psuid=${userInfo}`,
+                    methodOfReg: "ya_oauth"
+                },
+            });
 
-
-            // TO DO: TRIM DEFAULT EMAIL AND LOGIN, ADD TO DATABASE (cwwebapp AND premiumobj) AND ACTIVATE SESSION
-
-            
+            const user = await prisma.users.findUnique({ where: { login } });
+            await prisma.premiumobj.create({
+                data: {
+                    userId: user.id
+                },
+            });
         }
-
-        
-
-        const verifyCode = await generateVerificationCode();
-
-        await prisma.users.create({
-            data: {
-                firstname: userInfo.firstname,
-                lastname: lastname,
-                login: login,
-                email: email,
-                password: hashedPassword,
-                verifyCode: verifyCode
-            },
-        });
-
-        const user = await prisma.users.findUnique({ where: { email } });
-        await prisma.premiumobj.create({
-            data: {
-                userId: user.id
-            },
-        });
 
         const new_token = jwt.sign(
             { id: user.id, login: user.login }, process.env.JWT_SECRET, {
-            expiresIn: "24h",
+            expiresIn: process.env.HOURS_EXPIRES_TOKEN,
         });
         localStorage.setItem("token", new_token);
 
-        return new Response(JSON.stringify({ message: "Sign up successful! Verification code sent", token, isNewUser }), { status: 201 });
+        NotifyYandexLogIn(email, firstname, req);
+
+        // return NextResponse.redirect(`${process.env.SITE_URL}`);
+
+        return new Response(JSON.stringify({ message: "Sign up via YANDEX ID was successfully!", token, isNewUser }), { status: 201 });
 
 
     } catch (error) {

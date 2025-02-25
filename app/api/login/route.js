@@ -24,7 +24,7 @@ export async function POST(req) {
 
         const token = jwt.sign(
             { id: user.id, login: user.login }, secret, {
-            expiresIn: "24h",
+            expiresIn: process.env.HOURS_EXPIRES_TOKEN,
         }
         );
 
