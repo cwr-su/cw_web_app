@@ -49,20 +49,27 @@ export default function LayoutClient({ children }) {
         setIsDarkMode(!isDarkMode);
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        setIsAuthenticated(null);
-        router.push("/login");
+    const handleLogout = async () => {
+        try {
+            await axios.post("/api/auth/logout");
+            setIsAuthenticated(false);
+            router.push("/login");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
     };
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            axios
-                .get("/api/user", { headers: { Authorization: `Bearer ${token}` } })
-                .then((res) => setIsAuthenticated(!!token))
-                .catch(() => setIsAuthenticated(null) & localStorage.removeItem("token"));
-        }
+        fetch("/api/user")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.userId) {
+                    setIsAuthenticated(true);
+                } else {
+                    setIsAuthenticated(false);
+                }
+            })
+            .catch(() => setIsAuthenticated(false));
     }, []);
 
     return (

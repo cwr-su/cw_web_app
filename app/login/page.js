@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import { YandexLoginLinkGenerate } from "../components/YandexLoginLinkGenerate";
@@ -12,6 +11,25 @@ import "../styles/auth_preloader.css";
 import "../styles/auth_registration_styles.css";
 
 export default function LoginPage() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const [isErrorMessageGETQ, setIsErrorMessageGETQ] = useState(false);
+    const [errorMessageGETQ, setErrorMessageGETQ] = useState("");
+
+    useEffect(() => {
+        const errorMessage = searchParams.get("error");
+        if (errorMessage) {
+            setErrorMessageGETQ("This E-Mail is already registered! Try to log in.");
+            setIsErrorMessageGETQ(true);
+        }
+
+        const newParams = new URLSearchParams(searchParams.toString());
+        newParams.delete("error");
+
+        router.replace(`/login?${newParams.toString()}`, { scroll: false });
+    }, [router]);
+
     const [authUrl, setAuthUrl] = useState("");
 
     useEffect(() => {
@@ -26,16 +44,14 @@ export default function LoginPage() {
     const [loadingFirst, setLoadingFirst] = useState(false);
     const [loadingSecond, setLoadingSecond] = useState(false);
 
-    const router = useRouter();
-
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            axios
-                .get("/api/user", { headers: { Authorization: `Bearer ${token}` } })
-                .then(() => router.push("/"))
-                .catch(() => localStorage.removeItem("token"));
-        }
+        fetch("/api/user")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.userId) {
+                    router.push("/");
+                }
+            });
     }, [router]);
 
     const handleChange = (e) => {
@@ -86,6 +102,8 @@ export default function LoginPage() {
 
     return (
         <section className="auth">
+            {isErrorMessageGETQ ? (<div className="errorSlide"><p>{errorMessageGETQ}</p></div>) : (<span style="display='none'"></span>)}
+
             <div className="logo-cw-id">
                 <span className="span-logo-cw-id"></span>
             </div>

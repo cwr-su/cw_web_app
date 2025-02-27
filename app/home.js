@@ -1,17 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Link from "next/link";
 
 import "./globals.css";
 import { getCookie } from "cookies-next/client";
+import { fetchUser } from "./components/getUserDataByToken/getUserDataByToken";
 
 export default function Home() {
-    // const [user, setUser] = useState(null);
-    // const [content, setContent] = useState("");
-    // const [posts, setPosts] = useState([]);
     const [isSetTGCookie, setTGCookie] = useState(false);
     const [parsedUserDataObj, setParsedUserData] = useState(null);
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        fetchUser(setUser);
+    }, []);
+
 
     useEffect(() => {
         const userData = getCookie('tg_user');
@@ -23,14 +27,6 @@ export default function Home() {
             setParsedUserData(parsedUserData);
         } else {
             console.log("No user data in cookie.");
-        }
-
-        const token = localStorage.getItem("token");
-        if (token) {
-            axios
-                .get("/api/user", { headers: { Authorization: `Bearer ${token}` } })
-                .then((res) => setUser(res.data.user))
-                .catch(() => setUser(null));
         }
         // fetchPosts();
     }, []);
@@ -70,6 +66,8 @@ export default function Home() {
                 ) : (
                     <p>Stranger</p>
                 )}
+
+                {user ? (<p>Hello, {user.login}. </p>) : (<p>Hmmm. </p>)}
 
                 <hr></hr>
 

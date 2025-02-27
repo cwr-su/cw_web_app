@@ -17,6 +17,15 @@ export default function RegisterPage() {
     const [loadingSecond, setLoadingSecond] = useState(false);
 
     const router = useRouter();
+    useEffect(() => {
+        fetch("/api/user_check_auth")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.userId) {
+                    router.push("/");
+                }
+            });
+    }, [router]);
 
     const [authUrl, setAuthUrl] = useState("");
 
@@ -111,16 +120,6 @@ export default function RegisterPage() {
         return isValid;
     };
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            axios
-                .get("/api/user", { headers: { Authorization: `Bearer ${token}` } })
-                .then(() => router.push("/"))
-                .catch(() => localStorage.removeItem("token"));
-        }
-    }, [router]);
-
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -147,9 +146,7 @@ export default function RegisterPage() {
 
             const data = await res.json();
             if (res.ok) {
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("isNewUser", data.isNewUser)
-                window.location.href = "/";
+                window.location.href = "/verify_email";
             } else {
                 if (data.fieldNameErr == "emptyFileds") {
                     setErrorPassword2(`${data.error}`);

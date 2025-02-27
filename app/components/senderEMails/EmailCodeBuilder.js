@@ -20,8 +20,7 @@ async function EMailCodeBuilder({ email, titleHTML, EMAILContent, details = fals
     });
 
     if (details) {
-        const userDetailsJSON = JSON.parse(await getUserDetails(request)); 
-
+        const userDetailsJSON = JSON.parse(await getUserDetails(request));
         var htmlContent = `
         ${await StyleCSSAndHeadersTemplate(titleHTML)}
         ${EMAILContent}

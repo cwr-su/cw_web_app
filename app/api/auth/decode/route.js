@@ -1,15 +1,12 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-const secret = process.env.JWT_SECRET;
-
 export async function GET(req) {
     try {
         const token = req.cookies.get("token")?.value;
-        if (!token) {
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-        }
+        if (!token) return NextResponse.json({ error: "No token found" }, { status: 401 });
 
+        const secret = process.env.JWT_SECRET;
         const decoded = jwt.verify(token, secret);
 
         return NextResponse.json({ userId: decoded.id, login: decoded.login });

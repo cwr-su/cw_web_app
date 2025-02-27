@@ -1,9 +1,13 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 import { sendVerificationEmail } from "../../components/senderEMails/VerificationCodeSendFromReg";
 import { generateVerificationCode } from "../../components/generateVerificationCode";
+import { generateNewJWTToken } from "../../components/generateNewJWTToken/generateNewJWTToken";
+
+const JWT_SECRET = process.env.JWT_SECRET;
+const HOURS_EXPIRES_TOKEN = process.env.HOURS_EXPIRES_TOKEN;
 
 const prisma = new PrismaClient();
 
@@ -29,7 +33,7 @@ export async function POST(req) {
 
         const verifyCode = await generateVerificationCode();
 
-        await prisma.users.create({
+        const user = await prisma.users.create({
             data: {
                 firstname: firstname,
                 lastname: lastname,
@@ -40,23 +44,23 @@ export async function POST(req) {
             },
         });
 
-        const user = await prisma.users.findUnique({ where: { email } });
-
         await prisma.premiumobj.create({
             data: {
                 userId: user.id
             },
         });
 
-        const token = jwt.sign(
-            { id: user.id, login: user.login }, process.env.JWT_SECRET, {
-            expiresIn: process.env.HOURS_EXPIRES_TOKEN,
-        });
-        const isNewUser = true;
+        const new_token = await generateNewJWTToken(JWT_SECRET, HOURS_EXPIRES_TOKEN, user);
 
         await sendVerificationEmail(email, firstname, verifyCode, req);
 
-        return new Response(JSON.stringify({ message: "Sign up successful! Verification code sent", token, isNewUser }), { status: 201 });
+        const response = NextResponse.json({ message: "Sign up successful! Verification code sent!" }, { status: 201 });
+        response.headers.set(
+            "Set-Cookie",
+            `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
+        );
+        return response;
+
     } catch (error) {
         console.error("Sign up error: ", error);
         return new Response(JSON.stringify({ error: "Server error!" }), { status: 500 });

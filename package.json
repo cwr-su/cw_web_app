@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"npx ngrok http 3000 --log=stdout\"",
     "build": "npm run prisma:generate && next build",
     "prisma:generate": "prisma generate",
     "vercel-build": "npm run prisma:generate && next build",
