@@ -8,8 +8,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # Устанавливаем зависимости
-RUN rm -rf node_modules package-lock.json
-RUN npm ci --legacy-peer-deps --no-audit --no-fund > install.log 2>&1
+RUN rm -rf package-lock.json node_modules
+RUN npm install --legacy-peer-deps --no-audit --no-fund
+RUN npm shrinkwrap
 
 # Копируем весь код в контейнер
 COPY . .
