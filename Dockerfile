@@ -11,6 +11,8 @@ RUN npm shrinkwrap
 
 COPY . .
 
+RUN rm -rf .next
+
 RUN npm run build
 
 EXPOSE 3000
