@@ -28,31 +28,7 @@ export default function Home() {
         } else {
             console.log("No user data in cookie.");
         }
-        // fetchPosts();
     }, []);
-
-    // const fetchPosts = async () => {
-    //     try {
-    //         const res = await axios.get("/api/posts");
-    //         setPosts(res.data);
-    //     } catch (error) {
-    //         console.error("Error loading posts:", error);
-    //     }
-    // };
-
-    // const handlePost = async () => {
-    //     if (!content.trim()) return;
-
-    //     const token = localStorage.getItem("token");
-    //     try {
-    //         await axios.post("/api/posts", { content }, { headers: { Authorization: `Bearer ${token}` } });
-    //         setContent("");
-    //         fetchPosts();
-    //     } catch (error) {
-    //         console.error("Error when publishing a post:", error);
-    //     }
-    // };
-
     return (
         <section className="my_page">
             <div className="feed">
@@ -70,29 +46,6 @@ export default function Home() {
                 {user ? (<p>Hello, {user.login}. </p>) : (<p>Hmmm. </p>)}
 
                 <hr></hr>
-
-                {/* {user ? (
-                    <div>
-                        <textarea
-                            className="whats_new"
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            placeholder="What's new?"
-                        />
-                        <button onClick={handlePost}>Publish</button>
-                    </div>
-                ) : (
-                    <p>Sign in to publish posts via CW ID</p>
-                )}
-                <div className="posts">
-                    {Array.isArray(posts) && posts.length > 0 ? (
-                        posts.map((post) => (
-                            <div key={post.id} className="post">{post.content}</div>
-                        ))
-                    ) : (
-                        <p>There are no posts to display.</p>
-                    )}
-                </div> */}
             </div>
         </section>
     );

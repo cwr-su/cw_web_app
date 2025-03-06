@@ -13,6 +13,6 @@ export async function sendVerificationEmail(email, firstname, verificationCode, 
     `;
 
     await EMailCodeBuilder(
-        { email: email, titleHTML: "Email Confirmation in CW ID", EMAILContent: EMAILContent, details: true, request: req }
+        { email: email, titleHTML: "Verification code for Email confirmation in CW ID", EMAILContent: EMAILContent, details: true, request: req }
     );
 }

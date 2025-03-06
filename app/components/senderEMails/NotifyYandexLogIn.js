@@ -7,6 +7,6 @@ export async function NotifyYandexLogIn(email, firstname, req) {
     `;
 
     await EMailCodeBuilder(
-        { email: email, titleHTML: "Email Confirmation in CW ID", EMAILContent: EMAILContent, details: true, request: req }
+        { email: email, titleHTML: "CW ID login via Yandex ID", EMAILContent: EMAILContent, details: true, request: req }
     );
 }

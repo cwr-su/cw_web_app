@@ -1,9 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { NextResponse } from "next/server";
+
+import { generateNewJWTToken } from "../../components/generateNewJWTToken/generateNewJWTToken";
+import { NotifyCWIDLogIn } from "../../components/senderEMails/NotifyCwIdLogIn";
+
+const JWT_SECRET = process.env.JWT_SECRET;
+const HOURS_EXPIRES_TOKEN = process.env.HOURS_EXPIRES_TOKEN;
 
 const prisma = new PrismaClient();
-const secret = process.env.JWT_SECRET || "2e1fbd3222815089d9cd39d63654a2c053285a5ca3dda46bb6cc201e718552e5";
 
 export async function POST(req) {
     try {
@@ -22,16 +27,29 @@ export async function POST(req) {
             return new Response(JSON.stringify({ error: "password" }), { status: 401 });
         }
 
-        const token = jwt.sign(
-            { id: user.id, login: user.login }, secret, {
-            expiresIn: process.env.HOURS_EXPIRES_TOKEN,
-        }
-        );
+        const new_token = await generateNewJWTToken(JWT_SECRET, HOURS_EXPIRES_TOKEN, user);
 
-        console.log("User logged in:", login);
-        return new Response(JSON.stringify({ token }), { status: 200 });
+        let response;
+
+        try {
+            await NotifyCWIDLogIn(email, firstname, verifyCode, req);
+
+            response = NextResponse.json({ message: "Successfully login in CW ID! Notification has been sent" }, { status: 201 });
+            response.headers.set(
+                "Set-Cookie",
+                `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
+            );
+        } catch {
+            response = NextResponse.json({ message: "Successfully login in CW ID! Notification has not been sent (CW Mailer Error. Try disconnect VPN.)" }, { status: 201 });
+            response.headers.set(
+                "Set-Cookie",
+                `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
+            );
+        }
+        return response;
+
     } catch (error) {
-        console.error("Login error:", error);
-        return new Response(JSON.stringify({ error: "server" }), { status: 500 });
+        const response = NextResponse.json({ error: "server" }, { status: 400 });
+        return response;
     }
 }

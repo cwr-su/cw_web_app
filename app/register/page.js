@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import Link from "next/link";
 
 
@@ -300,7 +299,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="already-or-not-reg-auth-txt">
-                    <p>Have an account? <Link href="./auth">Sign in</Link></p>
+                    <p>Have an account? <Link href="./login">Sign in</Link></p>
                 </div>
 
             </form>

@@ -52,13 +52,24 @@ export async function POST(req) {
 
         const new_token = await generateNewJWTToken(JWT_SECRET, HOURS_EXPIRES_TOKEN, user);
 
-        await sendVerificationEmail(email, firstname, verifyCode, req);
+        let response;
+        
+        try {
+            await sendVerificationEmail(email, firstname, verifyCode, req);
 
-        const response = NextResponse.json({ message: "Sign up successful! Verification code sent!" }, { status: 201 });
-        response.headers.set(
-            "Set-Cookie",
-            `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
-        );
+            response = NextResponse.json({ message: "Sign up successful! Verification code sent!" }, { status: 201 });
+            response.headers.set(
+                "Set-Cookie",
+                `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
+            );
+        } catch {
+            response = NextResponse.json({ message: "Sign up successful! BUT Verification code has not been sent (CW Mailer Error. Try disconnect VPN.)" }, { status: 201 });
+            response.headers.set(
+                "Set-Cookie",
+                `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
+            );
+        }
+
         return response;
 
     } catch (error) {

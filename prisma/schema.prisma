@@ -14,18 +14,24 @@ datasource db {
 }
 
 model Users {
-  id             Int          @id @default(autoincrement())
-  firstname      String       @db.VarChar(200)
-  lastname       String       @db.VarChar(200)
-  login          String       @unique @db.VarChar(200)
-  email          String       @unique
+  id             Int    @id @default(autoincrement())
+  firstname      String @db.VarChar(200)
+  lastname       String @db.VarChar(200)
+  login          String @unique @db.VarChar(200)
+  email          String @unique
   password       String
-  verifyCode     String       @default("null")
-  methodOfReg    String       @default("cw_id")
-  avatar         String       @default("none")
-  avatarFileName String       @default("none")
-  premiumobj     Premiumobj[]
-  licences       Licences[]
+  verifyCode     String @default("null")
+  methodOfReg    String @default("cw_id")
+  avatar         String @default("none")
+  avatarFileName String @default("none")
+
+  credentialId String? @unique
+  publicKey    String?
+  challenge    String?
+  counter      Int     @default(0)
+
+  premiumobj Premiumobj[]
+  licences   Licences[]
 }
 
 model Premiumobj {
