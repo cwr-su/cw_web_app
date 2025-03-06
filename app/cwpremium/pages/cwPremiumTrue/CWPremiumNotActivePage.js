@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import TelegramLogin from "./TelegramWidget";
+import TelegramLogin from "../TelegramWidget";
 import Script from "next/script";
 
 export default function CWPremiumPageAuthFalse({ site_url_privacy_policy, site_url_public_offer, user }) {

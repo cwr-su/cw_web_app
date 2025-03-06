@@ -7,10 +7,12 @@ import Link from "next/link";
 import { YandexLoginLinkGenerate } from "../components/YandexLoginLinkGenerate";
 import YandexLoginLink from "../components/YandexLoginLink";
 
-import "../styles/auth_preloader.css"; 
+import "../styles/auth_preloader.css";
 import "../styles/auth_registration_styles.css";
 
 export default function LoginPage() {
+    const [redirUrlNext, setRedirUrlNext] = useState(null);
+
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -35,6 +37,12 @@ export default function LoginPage() {
     useEffect(() => {
         const { authUrl } = YandexLoginLinkGenerate();
         setAuthUrl(authUrl);
+    }, []);
+
+    useEffect(() => {
+        let redirUrlNext = localStorage.getItem("redirUrlNext");
+        if (redirUrlNext) setRedirUrlNext(redirUrlNext);
+        localStorage.removeItem("redirUrlNext");
     }, []);
 
     const [form, setForm] = useState({ login: "", password: "" });
@@ -76,8 +84,11 @@ export default function LoginPage() {
 
             const data = await res.json();
             if (res.ok) {
-                localStorage.setItem("token", data.token);
-                window.location.href = "/";
+                if (redirUrlNext) {
+                    window.location.href(redirUrlNext);
+                } else {
+                    window.location.href = "/";
+                }
             } else {
                 if (data.error == "login") {
                     setErrorLogin("This user does not exist!");

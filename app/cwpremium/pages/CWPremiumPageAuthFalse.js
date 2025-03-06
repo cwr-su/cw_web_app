@@ -4,6 +4,7 @@ import TelegramLogin from "./TelegramWidget";
 import Link from "next/link";
 
 export default function CWPremiumPageAuthFalse({ site_url_privacy_policy, site_url_public_offer }) {
+    localStorage.setItem("redirUrlNext", "/cwpremium")
     return (
         <section className="subscribe">
             <div className="card-cw-premium">

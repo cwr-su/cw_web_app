@@ -1,6 +1,6 @@
 "use client"
 
-import TelegramLogin from "./TelegramWidget";
+import TelegramLogin from "../TelegramWidget";
 import ManageCwPremiumTGNone from "../manageSectors/manageCwPremiumTGNone";
 import ManageCwPremiumTGConn from "../manageSectors/manageCwPremiumTGConn";
 
