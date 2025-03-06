@@ -1,0 +1,87 @@
+@import url('../../styles/theme.css');
+@import url('../../styles/fonts.css');
+
+.manage_my_cwpremium, 
+.faq_content_info_section p, 
+.faq_content_info_section h2, 
+.faq_content_info_section a,
+.manage_my_cwpremium p,
+.manage_my_cwpremium a {
+    font-family: "Stem-Regular", arial, sans-serif;
+    font-size: 1.25rem;
+}
+
+.faq_content_info_section p, .faq_content_info_section h2 {
+    font-weight: 500;
+}
+
+.cwpremium_content_tab:first-child {
+    padding-top: 0;
+}
+
+.cwpremium_content_tab:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.cwpremium_content_tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 0.1px var(--navbar-color-button-more);
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+}
+
+.faq_content_tab {
+    display: block;
+}
+
+.content_info_section {
+    font-weight: 900;
+    user-select: none;
+    transition: var(--transition-ease-in-out-navbar);
+    color: var(--color-placeholder);
+    width: auto;
+    word-break: break-all;
+    hyphens: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.faq_content_info_section {
+    width: 100%;
+}
+
+.title_section {
+    padding: 0;
+    margin: 0;
+}
+
+.info_main_block {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    user-select: none;
+}
+
+.faq_title_section_tab {
+    display: none;
+}
+
+.faq_cwpremium_in_tab h2 {
+    padding-top: 0;
+    padding-left: 0;
+    font-weight: bold;
+}
+
+
+.link-tab-btn a {
+    font-size: 1.1rem;
+    color: inherit;
+}
+
+.unlink-tg-form-in-tab p {
+    font-size: 1.1rem;
+}

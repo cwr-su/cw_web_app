@@ -1,0 +1,50 @@
+.user_container {
+    margin: 1rem;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tabs>input[type="radio"] {
+    display: none;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#tab-btn-1:checked~#content-1,
+#tab-btn-2:checked~#content-2,
+#tab-btn-3:checked~#content-3 {
+    display: block;
+}
+
+.tabs>label {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+    transition: color .15s ease-in-out, border-color .15s ease-in-out;
+    color: var(--color-placeholder);
+    background: 0 0;
+    border-bottom: 0.125rem solid transparent;
+    border-radius: 2px;
+    font-size: 1.1rem;
+}
+
+.tabs>label:hover {
+    border-bottom-color: var(--txt-span-color);
+    border-radius: 2px;
+}
+
+.tabs>input[type="radio"]:checked+label {
+    cursor: default;
+    font-weight: bold;
+    color: var(--txt-span-color);
+    border-bottom-color: var(--txt-span-color);
+    border-radius: 2px;
+}

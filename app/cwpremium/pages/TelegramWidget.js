@@ -10,10 +10,10 @@ const TelegramLogin = () => {
         script.setAttribute("data-auth-url", "/api/auth/telegram");
         script.async = true;
 
-        document.getElementById("telegram-widget-container").appendChild(script);
+        document.querySelector(".conn-tg").appendChild(script);
     }, []);
 
-    return <div id="telegram-widget-container"></div>;
+    return <div className="conn-tg"></div>;
 };
 
 export default TelegramLogin;

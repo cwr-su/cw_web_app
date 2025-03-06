@@ -32,7 +32,7 @@ export async function POST(req) {
         let response;
 
         try {
-            await NotifyCWIDLogIn(email, firstname, verifyCode, req);
+            await NotifyCWIDLogIn(email, firstname, req);
 
             response = NextResponse.json({ message: "Successfully login in CW ID! Notification has been sent" }, { status: 201 });
             response.headers.set(

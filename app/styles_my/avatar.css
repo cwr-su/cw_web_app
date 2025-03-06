@@ -1,0 +1,149 @@
+:root {
+    --shadow-color: hsl(272, 20%, 65%);
+    --input-bg-color: hsl(208.7, 20%, 80%);
+    --input-icon-color: hsl(258, 20%, 50%);
+    --outline-color: hsl(269, 100%, 50%);
+    --check-color: hsl(270, 100%, 53%);
+}
+
+.avatar-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease all;
+    width: 150px;
+    height: 150px;
+    padding: 4px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.avatar-input__label {
+    box-shadow: 0 20px 25px -5px var(--shadow-color),
+        0 8px 10px -6px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    transition: 0.4s ease all;
+
+    overflow: hidden;
+
+    cursor: pointer;
+    z-index: 1;
+}
+
+.avatar-input--dragover,
+.avatar-input--uploading,
+.avatar-input--success,
+.avatar-input:active {
+    transform: scale(0.9);
+}
+
+.avatar-input:active .avatar-input__label {
+    box-shadow: none;
+}
+
+.avatar-input--dragover .avatar-input__label,
+.avatar-input--uploading .avatar-input__label,
+.avatar-input--success .avatar-input__label {
+    box-shadow: none;
+    filter: brightness(0.5);
+}
+
+.avatar-input__input {
+    display: none;
+}
+
+.avatar-input__icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--input-icon-color);
+    background: var(--input-bg-color);
+    transition: 0.2s ease all;
+}
+
+.avatar-input__preview,
+.user_avatar_img {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: 0.2s ease all;
+    transform: scale(1.05);
+}
+
+.avatar-input__outline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    stroke-opacity: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    color: var(--outline-color);
+    stroke-dasharray: var(--outline-total-stroke) var(--outline-stroke-offset);
+    stroke-dashoffset: var(--outline-total-stroke);
+    transition: 0.05s linear all;
+    pointer-events: none;
+}
+
+.avatar-input--uploading .avatar-input__outline,
+.avatar-input--success .avatar-input__outline {
+    stroke-opacity: 1;
+}
+
+.avatar-input--uploading .avatar-input__percentage {
+    opacity: 1;
+}
+
+.avatar-input__percentage {
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: bold;
+    transition: 0.25s ease opacity;
+    pointer-events: none;
+}
+
+.avatar-input__success {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    transition: 0.25s ease opacity;
+    width: 40%;
+    pointer-events: none;
+}
+
+.avatar-input__success-icon {
+    stroke-dasharray: var(--check-total-stroke) var(--check-total-stroke);
+    stroke-dashoffset: var(--check-stroke-offset);
+    opacity: 0;
+    transition: 0.4s ease all;
+    transition-delay: 100ms;
+    color: var(--check-color);
+}
+
+.avatar-input--success .avatar-input__success-icon {
+    opacity: 1;
+}
