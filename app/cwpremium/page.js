@@ -18,7 +18,9 @@ import "../styles/faq.css"
 
 
 export default function CWPremiumPage() {
-    localStorage.removeItem("redirUrlNext");
+    useEffect(() => {
+        localStorage.removeItem("redirUrlNext");
+    }, []); 
     
     const site_url_public_offer = `${process.env.NEXT_PUBLIC_SITE_URL}/public_offer/Public_offer_CWR_SU_24_11_2024.pdf`;
     const site_url_privacy_policy = `${process.env.NEXT_PUBLIC_SITE_URL}/privacy_policy/Privacy_Policy_CWR_SU_CW_from_23_11_2024.pdf`;
