@@ -24,64 +24,64 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
                 });
 
                 if (!user.ok) {
-                    console.error("Request error:", await res.text());
+                    console.error("Request error:", await user.text());
                     return;
                 }
 
-                const data = await res.json();
+                const data = await user.json();
                 setUserObj(data.user);
             } catch (error) {
-                console.error("Network error when getting a premium item:", error);
+                console.error("Network error when getting a user item:", error);
             }
         };
 
         fetchGetUserObject();
     }, [userId]);
 
-    useEffect(() => {
-        const checkPayment = async () => {
-            try {
-                const resCheckPayment = await fetch("/api/cwpremium/yookassa/check_payment", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ userId }),
-                });
+    // useEffect(() => {
+    //     const checkPayment = async () => {
+    //         try {
+    //             const resCheckPayment = await fetch("/api/cwpremium/yookassa/check_payment", {
+    //                 method: "POST",
+    //                 headers: { "Content-Type": "application/json" },
+    //                 body: JSON.stringify({ userId }),
+    //             });
 
-                if (resCheckPayment.ok) setCheckPayment(true);
-            } catch (error) {
-                console.error("Payment verification error:", error);
-            }
-        };
+    //             if (resCheckPayment.ok) setCheckPayment(true);
+    //         } catch (error) {
+    //             console.error("Payment verification error:", error);
+    //         }
+    //     };
 
-        checkPayment();
-    }, [userId]);
+    //     checkPayment();
+    // }, [userId]);
 
-    useEffect(() => {
-        if (!userId) return;
+    // useEffect(() => {
+    //     if (!userId) return;
 
-        const fetchPremiumObj = async () => {
-            try {
-                const res = await fetch("/api/cwpremium/premiumobj/get", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ userId }),
-                });
+    //     const fetchPremiumObj = async () => {
+    //         try {
+    //             const res = await fetch("/api/cwpremium/premiumobj/get", {
+    //                 method: "POST",
+    //                 headers: { "Content-Type": "application/json" },
+    //                 body: JSON.stringify({ userId }),
+    //             });
 
-                if (!res.ok) {
-                    console.error("Request error:", await res.text());
-                    return;
-                }
+    //             if (!res.ok) {
+    //                 console.error("Request error:", await res.text());
+    //                 return;
+    //             }
 
-                const data = await res.json();
-                setPremiumObj(data.premiumobj);
-                setPremiumEndTime(data.premiumobj?.userCwPremium || null);
-            } catch (error) {
-                console.error("Network error when getting a premium object:", error);
-            }
-        };
+    //             const data = await res.json();
+    //             setPremiumObj(data.premiumobj);
+    //             setPremiumEndTime(data.premiumobj?.userCwPremium || null);
+    //         } catch (error) {
+    //             console.error("Network error when getting a premium object:", error);
+    //         }
+    //     };
 
-        fetchPremiumObj();
-    }, [userId]);
+    //     fetchPremiumObj();
+    // }, [userId]);
 
     useEffect(() => {
         if (premiumEndTime) {
@@ -93,7 +93,7 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
     return (
         <section className="cwpremium_lg_ok">
             {
-                checkPayment && premiumobj?.userCwPremium != "none" && premiumobj?.userCwPremium != "process_payment" ? (
+                checkPayment && premiumobj?.userCwPremium != "none" && premiumobj?.userCwPremium != "process_payment"  && user ? (
                     <CWPremiumActiveOrExpiredOrWithTGManagePage premiumobj={premiumobj} subDays={subDays} user={user} site_url_privacy_policy={site_url_privacy_policy} site_url_public_offer={site_url_public_offer} />
                 ) : (
                     <CWPremiumNotActivePage site_url_privacy_policy={site_url_privacy_policy} site_url_public_offer={site_url_public_offer} user={user} />

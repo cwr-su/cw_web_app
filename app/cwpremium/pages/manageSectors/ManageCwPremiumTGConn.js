@@ -1,8 +1,10 @@
 "use client"
 
+import Link from "next/link";
+
 export default function ManageCwPremiumTGConn({ subDays, user }) {
-    const linkMailToFaqAns1 = `mailto:help@cwr.su?subject=Refund and cancellation of CW Premium subscription on account: ${user.login}`;
-    const linkMailToFaqAns3 = `mailto:help@cwr.su?subject=I (@${user.login}) Found a new bug in the cwr.su system. System: CW`;
+    const linkMailToFaqAns1 = `mailto:help@cwr.su?subject=Refund and cancellation of CW Premium subscription on account: ${user?.login}`;
+    const linkMailToFaqAns3 = `mailto:help@cwr.su?subject=I (@${user?.login}) Found a new bug in the cwr.su system. System: CW`;
     const typeAnimate = 'fade';
 
     return (
@@ -16,7 +18,7 @@ export default function ManageCwPremiumTGConn({ subDays, user }) {
                     <input id="tab-btn-2" name="tab-btn" type="radio" value="" />
                     <label for="tab-btn-2">Telegram Link</label>
                     <input id="tab-btn-3" name="tab-btn" type="radio" value="" />
-                    <label for="tab-btn-3" className="link-tab-btn"><a href="../my/ai/">My AI</a></label>
+                    <label for="tab-btn-3" className="link-tab-btn"><Link href="../my/ai/">My AI</Link></label>
 
                     <div className="tab-content" id="content-1">
                         <div className="cwpremium_content_tab">
@@ -67,7 +69,7 @@ export default function ManageCwPremiumTGConn({ subDays, user }) {
                                                 </div>
                                                 <div className="faq-answer faqAns2">
                                                     <p>To get the API key you need:</p>
-                                                    <p>1. To go to <a href="../../my/">this page (CW ID account)</a>, and then go to the "My API" section.</p>
+                                                    <p>1. To go to <Link href="../../my/">this page (CW ID account)</Link>, and then go to the "My API" section.</p>
                                                     <p>2. Click on the pencil to the right of the phrase "API (Licence) key" and then confirm the action (issuing/reissuing a new API key) by entering your login.</p>
                                                     <p>3. After that you will receive your API key in the "release window".<br />Important! After updating the CW ID account management page - the key will be hidden.</p>
                                                 </div>
@@ -136,25 +138,25 @@ export default function ManageCwPremiumTGConn({ subDays, user }) {
                                                             <div className="form_input_box_block">
                                                                 <p className="form_input_box_title">Enter your login, to confirm the action:</p>
                                                             </div>
-                                                            <input type="text" name="login" placeholder={user.login} />
+                                                            <input type="text" name="login" placeholder={user?.login} />
                                                         </div>
-                                                        <div id="preloader" style="display: none;">
+                                                        <div id="preloader" style={{ display: "none" }}>
                                                             <div id="loader"></div>
                                                         </div>
-                                                        <div id="preloader_two" style="display: none;">
+                                                        <div id="preloader_two" style={{ display: "none" }}>
                                                             <svg className="pl" viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
                                                                 <defs>
                                                                     <linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
-                                                                        <stop offset="0%" stop-color="hsl(313,90%,55%)" />
-                                                                        <stop offset="100%" stop-color="hsl(223,90%,55%)" />
+                                                                        <stop offset="0%" stopColor="hsl(313,90%,55%)" />
+                                                                        <stop offset="100%" stopColor="hsl(223,90%,55%)" />
                                                                     </linearGradient>
                                                                     <linearGradient id="pl-grad2" x1="0" y1="0" x2="0" y2="1">
-                                                                        <stop offset="0%" stop-color="hsl(313,90%,55%)" />
-                                                                        <stop offset="100%" stop-color="hsl(223,90%,55%)" />
+                                                                        <stop offset="0%" stopColor="hsl(313,90%,55%)" />
+                                                                        <stop offset="100%" stopColor="hsl(223,90%,55%)" />
                                                                     </linearGradient>
                                                                 </defs>
-                                                                <circle className="pl__ring" cx="100" cy="100" r="82" fill="none" stroke="url(#pl-grad1)" stroke-width="36" stroke-dasharray="0 257 1 257" stroke-dashoffset="0.01" stroke-linecap="round" transform="rotate(-90,100,100)" />
-                                                                <line className="pl__ball" stroke="url(#pl-grad2)" x1="100" y1="18" x2="100.01" y2="182" stroke-width="36" stroke-dasharray="1 165" stroke-linecap="round" />
+                                                                <circle className="pl__ring" cx="100" cy="100" r="82" fill="none" stroke="url(#pl-grad1)" strokeWidth="36" strokeDasharray="0 257 1 257" strokeDashoffset="0.01" strokeLinecap="round" transform="rotate(-90,100,100)" />
+                                                                <line className="pl__ball" stroke="url(#pl-grad2)" x1="100" y1="18" x2="100.01" y2="182" strokeWidth="36" strokeDasharray="1 165" strokeLinecap="round" />
                                                             </svg>
                                                         </div>
                                                         <p className="error" id="error-message"></p>

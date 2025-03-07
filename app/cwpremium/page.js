@@ -19,9 +19,10 @@ import "../styles/faq.css"
 
 export default function CWPremiumPage() {
     useEffect(() => {
+        console.log("Start....");
         localStorage.removeItem("redirUrlNext");
-    }, []); 
-    
+    }, []);
+
     const site_url_public_offer = `${process.env.NEXT_PUBLIC_SITE_URL}/public_offer/Public_offer_CWR_SU_24_11_2024.pdf`;
     const site_url_privacy_policy = `${process.env.NEXT_PUBLIC_SITE_URL}/privacy_policy/Privacy_Policy_CWR_SU_CW_from_23_11_2024.pdf`;
 
@@ -46,25 +47,29 @@ export default function CWPremiumPage() {
 
     return (
         <section className="cwpremium">
-            {userId ? (
-                paymentStatus === "successful" ? (
-                    <div class="notify-block">
-                        <div id="notification">
-                            <div class="successful-box">
-                                <span></span>
-                            </div>
-                            <div class="sucf-box-text">
-                                <p>Success</p>
-                                <p>CW subscription payment was successful!</p>
-                            </div>
-                            <button id="close" onclick="closeSuccessfulBox()">
-                                &times;
-                            </button>
+            {paymentStatus === "successful" && userId ? (
+                <div class="notify-block">
+                    <div id="notification">
+                        <div class="successful-box">
+                            <span></span>
                         </div>
-
-                        <Script src="/scripts/succ_paystat_mdl.js" strategy="afterInteractive" />
+                        <div class="sucf-box-text">
+                            <p>Success</p>
+                            <p>CW subscription payment was successful!</p>
+                        </div>
+                        <button id="close" onClick="closeSuccessfulBox()">
+                            &times;
+                        </button>
                     </div>
-                ) : (
+
+                    <Script src="/scripts/succ_paystat_mdl.js" strategy="afterInteractive" />
+                </div>
+            ) : (
+                null
+            )}
+
+            {
+                paymentStatus === "error" && userId ? (
                     <div class="notify-block-err">
                         <div id="notification-err">
                             <div class="error-box">
@@ -74,16 +79,22 @@ export default function CWPremiumPage() {
                                 <p>Payment failed or is pending payment</p>
                                 <p>Try update the page!</p>
                             </div>
-                            <button id="close-err" onclick="closeErrorBox()">
+                            <button id="close-err" onClick="closeErrorBox()">
                                 &times;
                             </button>
                         </div>
                         <Script src="/scripts/err_paystat_mdl.js" strategy="afterInteractive" />
                     </div>
+                ) : (
+                    null
                 )
-                    (
-                        <CWPremiumPageAuthTrue userId={userId} site_url_privacy_policy={site_url_privacy_policy} site_url_public_offer={site_url_public_offer} />
-                    )
+            }
+
+            {userId ? (
+
+                (
+                    <CWPremiumPageAuthTrue userId={userId} site_url_privacy_policy={site_url_privacy_policy} site_url_public_offer={site_url_public_offer} />
+                )
             ) : (
                 <CWPremiumPageAuthFalse site_url_privacy_policy={site_url_privacy_policy} site_url_public_offer={site_url_public_offer} />
             )}

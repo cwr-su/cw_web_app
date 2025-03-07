@@ -68,28 +68,28 @@ export default function CWPremiumActiveOrExpiredOrWithTGManagePage({ premiumobj,
                                                     <h3>Artificial intelligence CW</h3>
                                                 </div>
                                                 <form action="index.php" method="post" className="subscribe_form" id='subscribef'>
-                                                    <input type="hidden" name="email" value={user.email} />
+                                                    <input type="hidden" name="email" value={user?.email} />
                                                     <div className="input-box button-submit">
                                                         <input type="submit" name="subscribe" value="Subscribe" className="subscribe-btn" />
                                                     </div>
                                                 </form>
-                                                <div id="preloader" style="display: none;">
+                                                <div id="preloader" style={{ display: "none" }}>
                                                     <div id="loader"></div>
                                                 </div>
-                                                <div id="preloader_two" style="display: none;">
+                                                <div id="preloader_two" style={{ display: "none" }}>
                                                     <svg className="pl" viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
                                                         <defs>
                                                             <linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
-                                                                <stop offset="0%" stop-color="hsl(313,90%,55%)" />
-                                                                <stop offset="100%" stop-color="hsl(223,90%,55%)" />
+                                                                <stop offset="0%" stopColor="hsl(313,90%,55%)" />
+                                                                <stop offset="100%" stopColor="hsl(223,90%,55%)" />
                                                             </linearGradient>
                                                             <linearGradient id="pl-grad2" x1="0" y1="0" x2="0" y2="1">
-                                                                <stop offset="0%" stop-color="hsl(313,90%,55%)" />
-                                                                <stop offset="100%" stop-color="hsl(223,90%,55%)" />
+                                                                <stop offset="0%" stopColor="hsl(313,90%,55%)" />
+                                                                <stop offset="100%" stopColor="hsl(223,90%,55%)" />
                                                             </linearGradient>
                                                         </defs>
-                                                        <circle className="pl__ring" cx="100" cy="100" r="82" fill="none" stroke="url(#pl-grad1)" stroke-width="36" stroke-dasharray="0 257 1 257" stroke-dashoffset="0.01" stroke-linecap="round" transform="rotate(-90,100,100)" />
-                                                        <line className="pl__ball" stroke="url(#pl-grad2)" x1="100" y1="18" x2="100.01" y2="182" stroke-width="36" stroke-dasharray="1 165" stroke-linecap="round" />
+                                                        <circle className="pl__ring" cx="100" cy="100" r="82" fill="none" stroke="url(#pl-grad1)" strokeWidth="36" strokeDasharray="0 257 1 257" strokeDashoffset="0.01" strokeLinecap="round" transform="rotate(-90,100,100)" />
+                                                        <line className="pl__ball" stroke="url(#pl-grad2)" x1="100" y1="18" x2="100.01" y2="182" strokeWidth="36" strokeDasharray="1 165" strokeLinecap="round" />
                                                     </svg>
                                                 </div>
                                             </div>
@@ -103,11 +103,11 @@ export default function CWPremiumActiveOrExpiredOrWithTGManagePage({ premiumobj,
 
                                 <div className="important">
                                     <p>
-                                        <b>{user.firstname} {user.lastname}</b>, please read the documents (contract of offer and privacy policy) before paying for your subscription.
+                                        <b>{user?.firstname} {user?.lastname}</b>, please read the documents (contract of offer and privacy policy) before paying for your subscription.
                                     </p>
 
                                     <p>
-                                        By clicking on the "Subscribe" button, you (<em>{user.firstname} {user.lastname}, @{user.login}</em>) accept the contract/public offer located at: <a href={site_url_public_offer} target="_blank">this page</a>, and the privacy policy located at: <a href={site_url_privacy_policy} target="_blank">this page</a>.
+                                        By clicking on the "Subscribe" button, you (<em>{user?.firstname} {user?.lastname}, @{user?.login}</em>) accept the contract/public offer located at: <a href={site_url_public_offer} target="_blank">this page</a>, and the privacy policy located at: <a href={site_url_privacy_policy} target="_blank">this page</a>.
                                     </p>
 
                                     <p>
