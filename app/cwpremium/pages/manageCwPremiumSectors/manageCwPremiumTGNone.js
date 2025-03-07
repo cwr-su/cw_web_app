@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-export default function manageCwPremiumTGNone({ subDays, user }) {
+export default function ManageCwPremiumTGNone({ subDays, user }) {
     const linkMailToFaqAns1 = `mailto:help@cwr.su?subject=Refund and cancellation of CW Premium subscription on account: ${user?.login}`;
     const linkMailToFaqAns3 = `mailto:help@cwr.su?subject=I (@${user?.login}) Found a new bug in the cwr.su system. System: CW`;
     

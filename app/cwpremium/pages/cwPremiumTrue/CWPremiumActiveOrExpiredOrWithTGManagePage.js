@@ -1,8 +1,8 @@
 "use client"
 
 import TelegramLogin from "../TelegramWidget";
-import manageCwPremiumTGNone from "../manageSectors/manageCwPremiumTGNone";
-import manageCwPremiumTGConn from "../manageSectors/manageCwPremiumTGConn";
+import ManageCwPremiumTGNone from "../manageCwPremiumSectors/manageCwPremiumTGNone";
+import ManageCwPremiumTGConn from "../manageCwPremiumSectors/manageCwPremiumTGConn";
 
 export default function CWPremiumActiveOrExpiredOrWithTGManagePage({ premiumobj, subDays, user, site_url_privacy_policy, site_url_public_offer }) {
     return (
@@ -20,9 +20,9 @@ export default function CWPremiumActiveOrExpiredOrWithTGManagePage({ premiumobj,
                     <main>
                         {
                             premiumobj.userMCWTgId === "none" ? (
-                                <manageCwPremiumTGNone subDays={subDays} user={user} />
+                                <ManageCwPremiumTGNone subDays={subDays} user={user} />
                             ) : (
-                                <manageCwPremiumTGConn subDays={subDays} user={user} />
+                                <ManageCwPremiumTGConn subDays={subDays} user={user} />
                             )
                         }
                     </main>
