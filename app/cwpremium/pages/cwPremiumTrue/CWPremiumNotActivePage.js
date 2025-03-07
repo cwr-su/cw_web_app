@@ -13,7 +13,7 @@ export default function CWPremiumPageAuthFalse({ site_url_privacy_policy, site_u
             setError403ForConnMCW(true);
             localStorage.removeItem("error403ForConnMCW");
         }
-    })
+    }, [])
 
     return (
         <section className="subscribe">

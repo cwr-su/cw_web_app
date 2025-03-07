@@ -12,8 +12,10 @@ import "../styles/auth_preloader.css";
 import "../styles/auth_registration_styles.css";
 
 export default function RegisterPage() {
-    localStorage.removeItem("redirUrlNext");
-    
+    useEffect(() => {
+        localStorage.removeItem("redirUrlNext");
+    }, []);
+
     const [loadingFirst, setLoadingFirst] = useState(false);
     const [loadingSecond, setLoadingSecond] = useState(false);
 
