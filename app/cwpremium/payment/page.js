@@ -1,31 +1,31 @@
 "use client";
 
-import { Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function PaymentPage() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const [status, setStatus] = useState < string | null > (null);
+    const [searchParams, setSearchParams] = useState < URLSearchParams | null > (null);
 
     useEffect(() => {
-        if (!searchParams) return;
+        if (typeof window !== "undefined") {
+            const params = new URLSearchParams(window.location.search);
+            setSearchParams(params);
+        }
+    }, []);
 
-        const paymentStatus = searchParams.get("paymentStatus");
-        const newStatus = paymentStatus === "successful" ? "successful" : "error";
+    useEffect(() => {
+        if (searchParams) {
+            const paymentStatus = searchParams.get("paymentStatus");
+            if (paymentStatus === "successful") {
+                localStorage.setItem("paymentStatus", "successful");
+            } else {
+                localStorage.setItem("paymentStatus", "error");
+            }
 
-        localStorage.setItem("paymentStatus", newStatus);
-        setStatus(newStatus);
-
-        setTimeout(() => {
             router.push("/cwpremium");
-        }, 100);
+        }
     }, [searchParams, router]);
 
-    return (
-        <Suspense fallback={<span>...</span>}>
-            <span>Process...</span>
-        </Suspense>
-    );
+    return null;
 }
