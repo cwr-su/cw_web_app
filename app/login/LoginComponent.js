@@ -40,9 +40,8 @@ export default function LoginPage() {
     }, []);
 
     useEffect(() => {
-        let redirUrlNext = localStorage.getItem("redirUrlNext");
-        if (redirUrlNext) setRedirUrlNext(redirUrlNext);
-        localStorage.removeItem("redirUrlNext");
+        const redirUrlNextItem = sessionStorage.getItem("redirUrlNext");
+        if (redirUrlNextItem) setRedirUrlNext(redirUrlNextItem);
     }, []);
 
     const [form, setForm] = useState({ login: "", password: "" });
@@ -85,7 +84,7 @@ export default function LoginPage() {
             const data = await res.json();
             if (res.ok) {
                 if (redirUrlNext) {
-                    window.location.href(redirUrlNext);
+                    window.location.href = redirUrlNext;
                 } else {
                     window.location.href = "/";
                 }
@@ -101,7 +100,7 @@ export default function LoginPage() {
             setLoadingSecond(false);
 
         } catch (err) {
-            setErrorPassword("Server connection error");
+            setErrorPassword(`Server connection error. ${err}`);
 
             setLoadingFirst(false);
             setLoadingSecond(false);

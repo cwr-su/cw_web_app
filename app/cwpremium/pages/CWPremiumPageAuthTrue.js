@@ -38,50 +38,90 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
         fetchGetUserObject();
     }, [userId]);
 
-    // useEffect(() => {
-    //     const checkPayment = async () => {
-    //         try {
-    //             const resCheckPayment = await fetch("/api/cwpremium/yookassa/check_payment", {
-    //                 method: "POST",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({ userId }),
-    //             });
+    useEffect(() => {
+        const getPaymentId = async () => {
+            try {
+                if (!userId) router.push("/login");
 
-    //             if (resCheckPayment.ok) setCheckPayment(true);
-    //         } catch (error) {
-    //             console.error("Payment verification error:", error);
-    //         }
-    //     };
+                const response = await fetch("/api/ykassa/getPremiumObj", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId }),
+                });
 
-    //     checkPayment();
-    // }, [userId]);
+                const data = await response.json();
+                if (data.premiumobj) {
+                    const paymentId = data.premiumobj.paymentId;
+                    if (paymentId == "none") {
+                        return false;
+                    }
+                    return paymentId;
+                }
 
-    // useEffect(() => {
-    //     if (!userId) return;
+            } catch (error) {
+                console.error("Error with getting PaymentId (Premium Object):", error);
+            }
+        };
 
-    //     const fetchPremiumObj = async () => {
-    //         try {
-    //             const res = await fetch("/api/cwpremium/premiumobj/get", {
-    //                 method: "POST",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({ userId }),
-    //             });
+        const checkPaymentFunc = async () => {
+            try {
+                const paymentId = await getPaymentId();
+                if (!paymentId) {
+                    return;
+                }
 
-    //             if (!res.ok) {
-    //                 console.error("Request error:", await res.text());
-    //                 return;
-    //             }
+                const response = await fetch(`/api/ykassa/checkPayment?paymentId=${paymentId}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                });
 
-    //             const data = await res.json();
-    //             setPremiumObj(data.premiumobj);
-    //             setPremiumEndTime(data.premiumobj?.userCwPremium || null);
-    //         } catch (error) {
-    //             console.error("Network error when getting a premium object:", error);
-    //         }
-    //     };
+                if (!response.ok) {
+                    throw new Error(`Request error: ${response.status}`);
+                }
 
-    //     fetchPremiumObj();
-    // }, [userId]);
+                const data = await response.json();
+
+                if (data.status === "succeeded") {
+                    setCheckPayment(true);
+                } else {
+                    setCheckPayment(false);
+                }
+            } catch (error) {
+                console.error("Payment verification error:", error);
+                return false;
+            }
+        };
+
+        checkPaymentFunc();
+    }, [userId]);
+
+    useEffect(() => {
+        if (!userId) return;
+
+        const fetchPremiumObj = async () => {
+            try {
+                const response = await fetch("/api/ykassa/getPremiumObj", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId }),
+                });
+
+                const data = await response.json();
+
+                if (data.premiumobj) {
+                    setPremiumObj(data.premiumobj);
+                    if (data.premiumobj.userCwPremium !== "process_payment" && data.premiumobj.userCwPremium !== "none") {
+                        setPremiumEndTime(`${data.premiumobj.userCwPremium}`);
+                    }
+                }
+
+            } catch (error) {
+                console.error("Error with getting PaymentId (Premium Object):", error);
+            }
+        };
+
+        fetchPremiumObj();
+    }, [userId]);
 
     useEffect(() => {
         if (premiumEndTime) {
@@ -93,7 +133,7 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
     return (
         <section className="cwpremium_lg_ok">
             {
-                checkPayment && premiumobj?.userCwPremium != "none" && premiumobj?.userCwPremium != "process_payment"  && user ? (
+                checkPayment && premiumobj?.userCwPremium != "none" && premiumobj?.userCwPremium != "process_payment" && user ? (
                     <CWPremiumActiveOrExpiredOrWithTGManagePage premiumobj={premiumobj} subDays={subDays} user={user} site_url_privacy_policy={site_url_privacy_policy} site_url_public_offer={site_url_public_offer} />
                 ) : (
                     <CWPremiumNotActivePage site_url_privacy_policy={site_url_privacy_policy} site_url_public_offer={site_url_public_offer} user={user} />

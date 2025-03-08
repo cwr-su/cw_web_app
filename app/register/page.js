@@ -13,7 +13,7 @@ import "../styles/auth_registration_styles.css";
 
 export default function RegisterPage() {
     useEffect(() => {
-        localStorage.removeItem("redirUrlNext");
+        sessionStorage.removeItem("redirUrlNext");
     }, []);
 
     const [loadingFirst, setLoadingFirst] = useState(false);

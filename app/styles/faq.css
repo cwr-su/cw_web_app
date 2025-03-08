@@ -60,12 +60,14 @@
     transition: none;
 }
 
-.visible-faq-item-sector .faq-span-button #openFaqAnswerBtn svg {
+.visible-faq-item-sector .faq-span-button #openFaqAnswerBtn svg,
+#openFaqAnswerBtn {
     transform: rotate(0deg);
     transition: transform 0.5s;
 }
 
-.visible-faq-item-sector.rotated .faq-span-button #openFaqAnswerBtn svg {
+.visible-faq-item-sector.rotated .faq-span-button #openFaqAnswerBtn svg,
+#openFaqAnswerBtn.rotated {
     transform: rotate(180deg);
     transition: transform 0.5s;
 }

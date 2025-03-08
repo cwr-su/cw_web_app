@@ -141,8 +141,8 @@ export default function LayoutClient({ children }) {
 
                                     <div className="flex-navbar">
                                         <div className="flex-navbar-left">
-                                            <div className="elem-nav"><Link href="/" className={pathname === "/" ? "active" : ""}><span className="first_p_child" id="home-icon"></span>Home</Link></div>
-                                            <div className="elem-nav"><Link href="/cwpremium/" className={pathname === "/cwpremium/" ? "active" : ""}><span id="cwpremium-icon"></span>CW Premium</Link></div>
+                                            <div className="elem-nav"><Link href="/" className={pathname === "" ? "active" : ""}><span className="first_p_child" id="home-icon"></span>Home</Link></div>
+                                            <div className="elem-nav"><Link href="/cwpremium/" className={pathname === "/cwpremium" ? "active" : ""}><span id="cwpremium-icon"></span>CW Premium</Link></div>
                                             <div className="elem-nav"><Link href="/projects" className={pathname === "/projects" ? "active" : ""}><span id="projects-icon"></span>CW's Projects</Link></div>
                                             <div className="elem-nav"><Link href="https://docs.cwr.su/" target="_blank"><span id="docs-icon"></span>Docs MCW</Link></div>
                                             <div className="elem-nav"><Link href="/from_developer" className={pathname === "/from_developer" ? "active" : ""}><span id="from-dev-icon"></span>From Developer</Link></div>

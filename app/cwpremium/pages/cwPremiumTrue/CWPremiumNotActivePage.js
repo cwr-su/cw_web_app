@@ -6,13 +6,41 @@ import Script from "next/script";
 
 export default function CWPremiumPageAuthFalse({ site_url_privacy_policy, site_url_public_offer, user }) {
     const [error403ForConnMCW, setError403ForConnMCW] = useState(null);
+    const [form, setForm] = useState({ userId: "" });
 
     useEffect(() => {
-        let error403ForConnMCWLS = localStorage.getItem("error403ForConnMCW");
+        if (user?.id) {
+            setForm(prevForm => ({ ...prevForm, userId: user.id }));
+        }
+    }, [user]);
+    
+    const handleChangeSubscribe = (e) => {
+        setForm((prevForm) => ({ ...prevForm, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmitSubscribe = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(form);
+            const response = await fetch("/api/ykassa/createPayment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form),
+            });
+
+            const data = await response.json();
+            if (data.confirmationUrl) window.location.href = `${data.confirmationUrl}`;
+        } catch (err) {
+            console.log("Error with subscribe.");
+        }
+    };
+
+    useEffect(() => {
+        let error403ForConnMCWLS = sessionStorage.getItem("error403ForConnMCW");
         if (error403ForConnMCWLS) {
             setError403ForConnMCW(true);
-            localStorage.removeItem("error403ForConnMCW");
         }
+        sessionStorage.removeItem("error403ForConnMCW");
     }, [])
 
     return (
@@ -76,8 +104,8 @@ export default function CWPremiumPageAuthFalse({ site_url_privacy_policy, site_u
                                     <p>Recommended by</p>
                                     <h3>Artificial intelligence CW</h3>
                                 </div>
-                                <form action="index.php" method="post" className="subscribe_form" id='subscribef'>
-                                    <input type="hidden" name="email" value={user?.email} />
+                                <form onSubmit={handleSubmitSubscribe} className="subscribe_form" id='subscribef'>
+                                    <input onChange={handleChangeSubscribe} type="hidden" name="userId" value={user?.id} />
 
                                     <div className="input-box button-submit" id="subscribe">
                                         <input type="submit" name="subscribe" value="Subscribe" className="subscribe-btn" />

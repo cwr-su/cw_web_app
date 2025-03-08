@@ -13,6 +13,7 @@ html {
     --span-logo-navbar: url('/storage/black-Logo-pen.svg');
     --bg-color-navbar: rgba(253, 253, 253, 0.765);
     --navbar-color-link: rgba(137, 37, 168, 0.855);
+    --navbar-color-link-active: rgb(149, 34, 185);
     --navbar-color-button-more: rgba(0, 0, 0, .7);
     --navbar-color-link-after: rgba(0, 0, 0, .95);
     --navbar-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
@@ -109,6 +110,7 @@ html {
         --span-logo-navbar: url('/storage/black-Logo-pen.svg');
         --bg-color-navbar: rgba(253, 253, 253, 0.765);
         --navbar-color-link: rgba(137, 37, 168, 0.855);
+        --navbar-color-link-active: rgb(149, 34, 185);
         --navbar-color-button-more: rgba(0, 0, 0, .7);
         --navbar-color-link-after: rgba(0, 0, 0, .95);
         --navbar-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
@@ -206,6 +208,7 @@ html {
     --span-logo-navbar: url('/storage/white-Logo-pen.svg');
     --bg-color-navbar: rgba(0, 0, 0, 0.765);
     --navbar-color-link: rgba(245, 208, 255, 0.885);
+    --navbar-color-link-active: rgb(250, 238, 253);
     --navbar-color-button-more: rgba(255, 255, 255, .7);
     --navbar-color-link-after: rgba(255, 255, 255, .95);
     --navbar-box-shadow: 0 0 8px 0 rgba(255, 255, 255, 0.15);
@@ -303,6 +306,7 @@ html {
         --span-logo-navbar: url('/storage/white-Logo-pen.svg');
         --bg-color-navbar: rgba(0, 0, 0, 0.765);
         --navbar-color-link: rgba(245, 208, 255, 0.885);
+        --navbar-color-link-active: rgb(250, 238, 253);
         --navbar-color-button-more: rgba(255, 255, 255, .7);
         --navbar-color-link-after: rgba(255, 255, 255, .95);
         --navbar-box-shadow: 0 0 8px 0 rgba(255, 255, 255, 0.15);

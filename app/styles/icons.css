@@ -42,6 +42,11 @@
     flex-direction: row;
 }
 
+.elem-nav a.active {
+    font-weight: 900;
+    color: var(--navbar-color-link-active);
+}
+
 .flex-navbar-left, .flex-navbar-right {
     display: flex;
     justify-content: center;

@@ -13,6 +13,8 @@
 
 .faq_content_info_section p, .faq_content_info_section h2 {
     font-weight: 500;
+    padding-right: 1rem;
+    word-break: break-word;
 }
 
 .cwpremium_content_tab:first-child {
