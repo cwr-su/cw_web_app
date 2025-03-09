@@ -8,6 +8,8 @@ RUN rm -rf node_modules package-lock.json && npm cache clean --force
 
 RUN npm install --omit=dev --no-audit --no-fund
 
+RUN apt-get update && apt-get install -y openssl
+
 COPY . .
 
 RUN rm -rf .next
