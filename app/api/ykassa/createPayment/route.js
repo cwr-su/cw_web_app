@@ -4,6 +4,9 @@ import { randomUUID } from 'crypto';
 
 import { PrismaClient } from '@prisma/client';
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
+
 const prisma = new PrismaClient();
 
 const checkout = new YooCheckout({
@@ -16,8 +19,14 @@ const SITE_URL = process.env.SITE_URL;
 
 export async function POST(req) {
     try {
-        const { userId } = await req.json();
-        if (!userId) return NextResponse.json({ error: "UserID is none!" }, { status: 500 });
+        const session = await getServerSession(authOptions);
+
+        if (!session) {
+            return new Response(JSON.stringify({ error: "Unauthorized! Please login!" }), { status: 401 });
+        }
+
+        const userId = session.user.id;
+        console.log(userId);
 
         const idempotenceKey = randomUUID();
 
@@ -28,17 +37,26 @@ export async function POST(req) {
             description: 'CW Premium',
         }, idempotenceKey);
 
-        const user = await prisma.premiumobj.update({
-            where: { id: userId },
+        const premiumObj = await prisma.premiumobj.findFirst({
+            where: { userId: userId },
+        });
+
+        if (!premiumObj) {
+            return new Response(JSON.stringify({ error: "No premium object found!" }), { status: 404 });
+        }
+
+        await prisma.premiumobj.update({
+            where: { id: premiumObj.id },
             data: {
                 userCwPremium: "process_payment",
                 costFloatStr: `${amount}`,
-                paymentId: payment.id,
+                paymentId: payment?.id,
             },
         });
 
         return NextResponse.json({ confirmationUrl: payment.confirmation.confirmation_url });
     } catch (error) {
+        console.log(`Error with create payment: Error: ${error}`);
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

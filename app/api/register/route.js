@@ -4,10 +4,6 @@ import { PrismaClient } from "@prisma/client";
 
 import { sendVerificationEmail } from "../../components/senderEMails/VerificationCodeSendFromReg";
 import { generateVerificationCode } from "../../components/generateVerificationCode";
-import { generateNewJWTToken } from "../../components/generateNewJWTToken/generateNewJWTToken";
-
-const JWT_SECRET = process.env.JWT_SECRET;
-const HOURS_EXPIRES_TOKEN = process.env.HOURS_EXPIRES_TOKEN;
 
 const prisma = new PrismaClient();
 
@@ -50,24 +46,14 @@ export async function POST(req) {
             },
         });
 
-        const new_token = await generateNewJWTToken(JWT_SECRET, HOURS_EXPIRES_TOKEN, user);
-
         let response;
         
         try {
             await sendVerificationEmail(email, firstname, verifyCode, req);
-
             response = NextResponse.json({ message: "Sign up successful! Verification code sent!" }, { status: 201 });
-            response.headers.set(
-                "Set-Cookie",
-                `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
-            );
-        } catch {
+        } catch (err) {
+            console.log(`Error with sending EMail: Error: ${err}`);
             response = NextResponse.json({ message: "Sign up successful! BUT Verification code has not been sent (CW Mailer Error. Try disconnect VPN.)" }, { status: 201 });
-            response.headers.set(
-                "Set-Cookie",
-                `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
-            );
         }
 
         return response;

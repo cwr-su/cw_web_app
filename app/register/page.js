@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import { signIn, useSession } from "next-auth/react";
 
 import { YandexLoginLinkGenerate } from "../components/YandexLoginLinkGenerate";
 import YandexLoginLink from "../components/YandexLoginLink";
@@ -20,15 +20,12 @@ export default function RegisterPage() {
     const [loadingSecond, setLoadingSecond] = useState(false);
 
     const router = useRouter();
+    const { data: session, status } = useSession();
     useEffect(() => {
-        fetch("/api/user_check_auth")
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.userId) {
-                    router.push("/");
-                }
-            });
-    }, [router]);
+        if (status === "authenticated") {
+            router.push("/");
+        }
+    }, [status, router]);
 
     const [authUrl, setAuthUrl] = useState("");
 
@@ -149,7 +146,18 @@ export default function RegisterPage() {
 
             const data = await res.json();
             if (res.ok) {
-                window.location.href = "/verify_email";
+                const result = await signIn("credentials", {
+                    redirect: false,
+                    login: form.login,
+                    password: form.password1,
+                });
+
+                if (!result.error) {
+                    router.push("/verify_email");
+                } else {
+                    setErrorPassword2("Login failed. Try to log in manually.");
+                }
+
             } else {
                 if (data.fieldNameErr == "emptyFileds") {
                     setErrorPassword2(`${data.error}`);
@@ -163,7 +171,8 @@ export default function RegisterPage() {
             }
             setLoadingSecond(false);
         } catch (err) {
-            setErrorPassword1("Server connection error");
+            setErrorPassword2("Server connection error");
+            console.log(`Server connection error: ${err}`);
             setLoadingFirst(false);
             setLoadingSecond(false);
         } finally {

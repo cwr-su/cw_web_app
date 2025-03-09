@@ -13,16 +13,17 @@
 
 .notification {
     transform: translateX(400px);
+    transition: transform 1s ease-in-out;
 }
 
 .notification.visible {
     transform: translateX(0);
-    transition: transform 1s ease-in-out;
 }
 
 .notification.hidden {
     transform: translateX(400px);
 }
+
 
 #notification {
     transition: transform 1s ease-in-out;
@@ -36,22 +37,23 @@
     display: grid;
     grid-template-columns: 1.2fr 6fr 0.5fr;
     -webkit-backdrop-filter: blur(10px) contrast(100%) saturate(180%);
-	backdrop-filter: saturate(180%) blur(10px) contrast(100%);
+    backdrop-filter: saturate(180%) blur(10px) contrast(100%);
 }
 
-.successful-box, .sucf-box-text {
+.successful-box,
+.sucf-box-text {
     align-self: center;
 }
 
 .sucf-box-text p:first-child {
     color: var(--navbar-color-link-after);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     padding: 0;
 }
 
 .sucf-box-text p:last-child {
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--navbar-color-button-more);
     font-weight: 400;
     padding: 0;

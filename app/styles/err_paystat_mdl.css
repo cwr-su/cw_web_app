@@ -13,11 +13,11 @@
 
 .notification-err {
     transform: translateX(400px);
+    transition: transform 1s ease-in-out;
 }
 
 .notification-err.visible {
     transform: translateX(0);
-    transition: transform 1s ease-in-out;
 }
 
 .notification-err.hidden {
@@ -47,12 +47,12 @@
 .err-box-text p:first-child {
     color: var(--navbar-color-link-after);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     padding: 0;
 }
 
 .err-box-text p:last-child {
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--navbar-color-button-more);
     font-weight: 400;
     padding: 0;

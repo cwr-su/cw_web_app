@@ -2,13 +2,10 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { NotifyYandexLogIn } from "../../../components/senderEMails/NotifyYandexLogIn";
 import { YandexLoginLinkGenerate } from "../../../components/YandexLoginLinkGenerate";
-import { generateNewJWTToken } from "../../../components/generateNewJWTToken/generateNewJWTToken";
 
 const CLIENT_ID = process.env.YANDEX_CLIENT_ID;
 const CLIENT_SECRET = process.env.YANDEX_CLIENT_SECRET;
 const REDIRECT_URI = `${process.env.SITE_URL}/api/auth/yandex`;
-const JWT_SECRET = process.env.JWT_SECRET;
-const HOURS_EXPIRES_TOKEN = process.env.HOURS_EXPIRES_TOKEN;
 
 const prisma = new PrismaClient();
 
@@ -87,17 +84,43 @@ export async function GET(req) {
             await prisma.premiumobj.create({ data: { userId: user.id } });
         }
 
-        const new_token = await generateNewJWTToken(JWT_SECRET, HOURS_EXPIRES_TOKEN, user);
+        try {
+            const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/callback/credentials`, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({
+                    login: `${login}`,
+                    password: `yandex_id_psuid=${userInfo.psuid}`,
+                    callbackUrl: "/",
+                }),
+                credentials: "include",
+            });
 
-        NotifyYandexLogIn(email, firstname, req);
+            if (!res.ok) {
+                return NextResponse.redirect(`${process.env.SITE_URL}/login`);
+            }
 
-        const response = NextResponse.redirect(process.env.SITE_URL);
-        response.headers.set(
-            "Set-Cookie",
-            `token=${new_token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${HOURS_EXPIRES_TOKEN * 3600}`
-        );
+            NotifyYandexLogIn(email, firstname, req);
+            return NextResponse.redirect(process.env.SITE_URL);
 
-        return response;
+        } catch (err) {
+            const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/callback/credentials`, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({
+                    login: `${login}`,
+                    password: `yandex_id_psuid=${userInfo.psuid}`,
+                    callbackUrl: "/",
+                }),
+                credentials: "include",
+            });
+
+            if (!res.ok) {
+                return NextResponse.redirect(`${process.env.SITE_URL}/login`);
+            }
+
+            return NextResponse.redirect(process.env.SITE_URL);
+        }
     } catch (error) {
         return NextResponse.json({ error: "Server error" }, { status: 500 });
     }

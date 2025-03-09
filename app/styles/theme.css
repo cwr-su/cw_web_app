@@ -296,7 +296,7 @@ html {
     /* CW PREMIUM COVER */
     --cover-cw-premium-benefits: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site.svg');
     --cover-cw-premium-benefits-for-mob-devices: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site-mobile.svg');
-    --important-bg-color: #9f56ca;
+    --important-bg-color: #540285;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -394,6 +394,6 @@ html {
         /* CW PREMIUM COVER */
         --cover-cw-premium-benefits: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site.svg');
         --cover-cw-premium-benefits-for-mob-devices: url('/storage/cw_premium/FOR-DARK-Poster-ADD-CW-Premium-for-site-mobile.svg');
-        --important-bg-color: #9f56ca;
+        --important-bg-color: #540285;
     }
 }

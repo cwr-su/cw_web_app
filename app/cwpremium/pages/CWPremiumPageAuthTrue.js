@@ -3,14 +3,14 @@
 import CWPremiumActiveOrExpiredOrWithTGManagePage from "./cwPremiumTrue/CWPremiumActiveOrExpiredOrWithTGManagePage";
 import CWPremiumNotActivePage from "./cwPremiumTrue/CWPremiumNotActivePage";
 import { useEffect, useState } from "react";
+import Loader from "@/app/components/Loader/LoadData";
 
 export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy, site_url_public_offer }) {
-    const [checkPayment, setCheckPayment] = useState(false);
+    const [checkPayment, setCheckPayment] = useState(undefined);
     const [premiumobj, setPremiumObj] = useState(null);
     const [premiumEndTime, setPremiumEndTime] = useState(null);
-    const [user, setUserObj] = useState(null);
-
     const [subDays, setSubDays] = useState(null);
+    const [user, setUserObj] = useState(null);
 
     useEffect(() => {
         if (!userId) return;
@@ -41,12 +41,9 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
     useEffect(() => {
         const getPaymentId = async () => {
             try {
-                if (!userId) router.push("/login");
-
                 const response = await fetch("/api/ykassa/getPremiumObj", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId }),
                 });
 
                 const data = await response.json();
@@ -55,6 +52,7 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
                     if (paymentId == "none") {
                         return false;
                     }
+                    setPremiumObj(data.premiumobj);
                     return paymentId;
                 }
 
@@ -67,6 +65,7 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
             try {
                 const paymentId = await getPaymentId();
                 if (!paymentId) {
+                    setCheckPayment(false);
                     return;
                 }
 
@@ -87,48 +86,37 @@ export default function CWPremiumPageAuthTrue({ userId, site_url_privacy_policy,
                     setCheckPayment(false);
                 }
             } catch (error) {
+                setCheckPayment(false);
                 console.error("Payment verification error:", error);
                 return false;
             }
         };
 
         checkPaymentFunc();
-    }, [userId]);
+    }, []);
 
-    useEffect(() => {
-        if (!userId) return;
-
-        const fetchPremiumObj = async () => {
-            try {
-                const response = await fetch("/api/ykassa/getPremiumObj", {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId }),
-                });
-
-                const data = await response.json();
-
-                if (data.premiumobj) {
-                    setPremiumObj(data.premiumobj);
-                    if (data.premiumobj.userCwPremium !== "process_payment" && data.premiumobj.userCwPremium !== "none") {
-                        setPremiumEndTime(`${data.premiumobj.userCwPremium}`);
-                    }
+    const fetchPremiumObj = async () => {
+        try {
+            if (premiumobj) {
+                if (premiumobj.userCwPremium !== "process_payment" && premiumobj.userCwPremium !== "none") {
+                    setPremiumEndTime(`${premiumobj.userCwPremium}`);
                 }
 
-            } catch (error) {
-                console.error("Error with getting PaymentId (Premium Object):", error);
+                if (premiumEndTime) {
+                    const endTime = parseInt(premiumEndTime, 10) - Math.floor(Date.now() / 1000);
+                    setSubDays(Math.round(endTime / 86400));
+                }
             }
-        };
-
-        fetchPremiumObj();
-    }, [userId]);
+        } catch (error) {
+            console.error("Error with getting PaymentId (Premium Object):", error);
+        }
+    };
 
     useEffect(() => {
-        if (premiumEndTime) {
-            const endTime = parseInt(premiumEndTime, 10) - Math.floor(Date.now() / 1000);
-            setSubDays(Math.round(endTime / 86400));
-        }
-    }, [premiumEndTime]);
+        fetchPremiumObj();
+    });
+
+    if (checkPayment === undefined) return <Loader />;
 
     return (
         <section className="cwpremium_lg_ok">

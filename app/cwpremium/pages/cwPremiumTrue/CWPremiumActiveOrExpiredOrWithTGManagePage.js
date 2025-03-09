@@ -117,7 +117,6 @@ export default function CWPremiumActiveOrExpiredOrWithTGManagePage({ premiumobj,
 
                                 <div className="footnote">
                                     <p>*UPDATE. If you subscribed via Telegram bot @helper_cwBot, on the website - you need to “apply changes”! To do so, click on the Sign-In button with Telegram.</p>
-                                    <p>**API. The API function will be added to the CW system (i.e. CWR.SU website) in the near future.</p>
                                 </div>
                             </div>
                         </section>

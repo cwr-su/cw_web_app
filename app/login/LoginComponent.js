@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Loader from "../components/Loader/LoadData";
 
 import { YandexLoginLinkGenerate } from "../components/YandexLoginLinkGenerate";
 import YandexLoginLink from "../components/YandexLoginLink";
@@ -10,14 +11,23 @@ import YandexLoginLink from "../components/YandexLoginLink";
 import "../styles/auth_preloader.css";
 import "../styles/auth_registration_styles.css";
 
+import { signIn, useSession, getSession } from "next-auth/react";
+
 export default function LoginPage() {
     const [redirUrlNext, setRedirUrlNext] = useState(null);
-
     const router = useRouter();
     const searchParams = useSearchParams();
-
     const [isErrorMessageGETQ, setIsErrorMessageGETQ] = useState(false);
     const [errorMessageGETQ, setErrorMessageGETQ] = useState("");
+    const { data: session, status } = useSession();
+
+    useEffect(() => {
+        if (status === "authenticated") {
+            let linkNext = "/";
+            if (session.user.verifyCode !== "null") linkNext = "/verify_email";
+            router.push(linkNext);
+        }
+    }, [status, router, session]);
 
     useEffect(() => {
         const errorMessage = searchParams.get("error");
@@ -51,16 +61,6 @@ export default function LoginPage() {
     const [loadingFirst, setLoadingFirst] = useState(false);
     const [loadingSecond, setLoadingSecond] = useState(false);
 
-    useEffect(() => {
-        fetch("/api/user")
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.userId) {
-                    router.push("/");
-                }
-            });
-    }, [router]);
-
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -71,44 +71,29 @@ export default function LoginPage() {
         setErrorPassword("");
         setLoadingFirst(true);
 
-        try {
-            const res = await fetch("/api/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
-            });
+        const result = await signIn("credentials", {
+            redirect: false,
+            login: form.login,
+            password: form.password,
+        });
 
-            setLoadingFirst(false);
-            setLoadingSecond(true);
+        setLoadingFirst(false);
+        setLoadingSecond(true);
 
-            const data = await res.json();
-            if (res.ok) {
-                if (redirUrlNext) {
-                    window.location.href = redirUrlNext;
-                } else {
-                    window.location.href = "/";
-                }
-            } else {
-                if (data.error == "login") {
-                    setErrorLogin("This user does not exist!");
-                } else if (data.error == "password") {
-                    setErrorPassword("The login or password is incorrect!");
-                } else if (data.error == "server") {
-                    setErrorPassword("Server connection error!");
-                }
+        if (result.error) {
+            setError("Invalid login or password");
+        } else {
+            const updatedSession = await getSession();
+            let nextUrl = "/";
+            if (updatedSession.user.verifyCode !== "null" || updatedSession.user.verifyCode !== null) {
+                nextUrl = "/verify_email";
             }
             setLoadingSecond(false);
-
-        } catch (err) {
-            setErrorPassword(`Server connection error. ${err}`);
-
-            setLoadingFirst(false);
-            setLoadingSecond(false);
-        } finally {
-            setLoadingFirst(false);
-            setLoadingSecond(false);
+            router.push(nextUrl);
         }
     };
+
+    if (status === "loading") return <Loader/>;
 
     return (
         <section className="auth">

@@ -2,11 +2,6 @@
 @import url('fonts.css');
 
 @font-face {
-    font-family: "DIN-2014";
-    src: url('../fonts/din/din-2014-rounded-regular.ttf');
-}
-
-@font-face {
     font-family: "Junegull_Regular";
     src: url('../fonts/junegull_rg.ttf');
 }
@@ -16,13 +11,6 @@
 }
 #subscribe {
     margin: 0;
-}
-
-.cwpremium p, .cwpremium a,
-.tgme_widget_login large,
-.body.widget_frame_base
- {
-    font-family: "DIN-2014";
 }
 
 .header-navbar p,
@@ -86,6 +74,7 @@ p {
     color: #fff;
     padding: 5px 5px;
     transition: 200ms;
+    border-radius: 5.5px;
 }
 
 .card .card__title .icon>a {
@@ -93,7 +82,7 @@ p {
 }
 
 .card .card__title .icon:hover {
-    background: #252525;
+    background: rgba(91, 6, 117, 0.85);
 }
 
 .card .card__body {
@@ -138,7 +127,6 @@ p {
 }
 
 .card .card__body .featured_text p.price {
-    font-family: "DIN-2014";
     color: var(--navbar-color-link-after);
     font-size: 26px;
 }
@@ -169,7 +157,6 @@ p {
 
 .card .card__body .description p {
     margin: 0;
-    font-family: "DIN-2014";
     font-weight: 300;
     line-height: 27px;
     font-size: 1.2rem;
@@ -178,7 +165,6 @@ p {
 }
 
 .card .card__body span.stock {
-    font-family: "DIN-2014";
     font-weight: 600;
     color: #a1cc16;
     user-select: none;
@@ -202,8 +188,8 @@ p {
     left: 40px;
     width: calc(100% - 40px);
     height: 3px;
-    background: var(--link-color-on-page-bottom-after);
-    background: linear-gradient(to right, var(--link-color-on-page-bottom-after) 0%, var(--link-color-on-page-bottom-after) 20%, #ddd 20%, #ddd 100%);
+    background: var(--navbar-color-link);
+    background: linear-gradient(to right, var(--navbar-color-link) 0%, var(--navbar-color-link) 80%, #ddd 20%, #ddd 100%);
     border-radius: 50px;
 }
 
@@ -224,10 +210,9 @@ p {
 .card .card__footer .recommend h3 {
     margin: 0;
     font-size: 20px;
-    font-family: "DIN-2014";
     font-weight: 600;
     text-transform: uppercase;
-    color: var(--link-color-on-page-bottom-after);
+    color: var(--navbar-color-link);
     padding: 0;
 }
 
@@ -237,7 +222,7 @@ p {
     padding: 14px 30px;
     border-radius: 200px;
     color: #fff;
-    background: var(--link-color-on-page-bottom-after);
+    background: var(--navbar-color-link);
     font-family: "Junegull_Regular";
     font-size: 16px;
     transition: 200ms;
@@ -405,10 +390,6 @@ p {
 
 .footnote p:last-child {
     margin-top: .1rem;
-}
-
-.tgme_widget_login.large button.tgme_widget_login_button {
-    font-family: "DIN-2014", cursive;
 }
 
 #cwpremium-logo-icon {

@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export async function POST(req) {
     try {
-        const { userId } = await req.json(); // Парсим JSON правильно
+        const { userId } = await req.json();
 
         if (!userId) {
             return new Response(JSON.stringify({ error: "userId is required" }), {

@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { checkingVerifyCode } from "../components/checkingVerifyCode";
+
+import { useSession } from "next-auth/react";
 
 import "../styles/auth_preloader.css";
 import "../styles/auth_registration_styles.css";
@@ -12,33 +13,16 @@ export default function VerifyEmailPage() {
     const [loadingSecond, setLoadingSecond] = useState(false);
 
     const router = useRouter();
-    const [userId, setUserId] = useState();
+
+    const { data: session, status } = useSession();
 
     useEffect(() => {
-        async function verifyUser() {
-            try {
-                const userRes = await fetch("/api/user");
-                const userData = await userRes.json();
-
-                if (!userData.userId) router.push("/login");
-
-                setUserId(userData.userId);
-
-                await checkingVerifyCode(userData.userId, router);
-            } catch (error) {
-                console.error("Error verifying user:", error);
-            }
+        if (status === "unauthenticated") {
+            router.push("/login");
+        } else if (status === "authenticated" && (session.user.verifyCode === "null" || session.user.verifyCode === null)) {
+            router.push("/");
         }
-
-        verifyUser();
-    }, [router]);
-
-    useEffect(() => {
-        setForm((prevForm) => ({
-            ...prevForm,
-            userId: userId
-        }));
-    }, [userId]);
+    }, [status, router, session]);
 
     const [errorVerification, setErrorVerification] = useState("");
     const [form, setForm] = useState({ verifyCode: "" });
@@ -65,9 +49,11 @@ export default function VerifyEmailPage() {
 
             const data = await res.json();
             if (res.ok) {
-                window.location.href = "/";
+                router.push("/");
             } else {
-                await checkingVerifyCode(userId, router);
+                if (status === "authenticated" && (session.user.verifyCode === "null" || session.user.verifyCode === null)) {
+                    router.push("/");
+                }
 
                 setErrorVerification(`${data.error}`);
                 document.querySelector(`input[name="verifyCode"]`)?.focus();

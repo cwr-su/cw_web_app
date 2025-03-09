@@ -1,21 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { SessionProvider } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import "./styles/index.css";
 import "./styles/theme.css";
 import "./styles/light_preloader.css";
+import "./styles/loader_server_data.css";
 
 export default function LayoutClient({ children }) {
+    return (
+        <SessionProvider>
+            <AuthWrapper>{children}</AuthWrapper>
+        </SessionProvider>
+    );
+}
+
+function AuthWrapper({ children }) {
+    const { data: session } = useSession();
+
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const router = useRouter();
 
     useEffect(() => {
         document.body.classList.add("loading");
@@ -48,29 +59,6 @@ export default function LayoutClient({ children }) {
         localStorage.setItem("color-scheme", newTheme);
         setIsDarkMode(!isDarkMode);
     };
-
-    const handleLogout = async () => {
-        try {
-            await axios.post("/api/auth/logout");
-            setIsAuthenticated(false);
-            router.push("/login");
-        } catch (error) {
-            console.error("Logout failed:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetch("/api/user")
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.userId) {
-                    setIsAuthenticated(true);
-                } else {
-                    setIsAuthenticated(false);
-                }
-            })
-            .catch(() => setIsAuthenticated(false));
-    }, []);
 
     return (
         <body className={`cw-body ${menuOpen ? "block" : ""}`}>
@@ -141,7 +129,7 @@ export default function LayoutClient({ children }) {
 
                                     <div className="flex-navbar">
                                         <div className="flex-navbar-left">
-                                            <div className="elem-nav"><Link href="/" className={pathname === "" ? "active" : ""}><span className="first_p_child" id="home-icon"></span>Home</Link></div>
+                                            <div className="elem-nav"><Link href="/" className={pathname === "/" ? "active" : ""}><span className="first_p_child" id="home-icon"></span>Home</Link></div>
                                             <div className="elem-nav"><Link href="/cwpremium/" className={pathname === "/cwpremium" ? "active" : ""}><span id="cwpremium-icon"></span>CW Premium</Link></div>
                                             <div className="elem-nav"><Link href="/projects" className={pathname === "/projects" ? "active" : ""}><span id="projects-icon"></span>CW's Projects</Link></div>
                                             <div className="elem-nav"><Link href="https://docs.cwr.su/" target="_blank"><span id="docs-icon"></span>Docs MCW</Link></div>
@@ -158,8 +146,8 @@ export default function LayoutClient({ children }) {
                                                 </div>
                                             </div>
                                             <div className="elem-nav">
-                                                {isAuthenticated ? (
-                                                    <Link href="#" onClick={(e) => { e.preventDefault(); handleLogout(); }} className="logout-btn" id="logout-btn">
+                                                {session ? (
+                                                    <Link href="#" onClick={(e) => { e.preventDefault(); signOut(); }} className="logout-btn" id="logout-btn">
                                                         <span id="auth-icon"></span>Logout
                                                     </Link>
                                                 ) : (
