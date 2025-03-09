@@ -6,7 +6,7 @@ COPY package*.json ./
 
 RUN rm -rf node_modules package-lock.json && npm cache clean --force
 
-RUN npm ci --omit=dev --no-audit --no-fund
+RUN npm install --omit=dev --no-audit --no-fund
 
 COPY . .
 
