@@ -1,13 +1,12 @@
-FROM node:20
+FROM node:20-slim
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN rm -rf package-lock.json node_modules
+RUN rm -rf node_modules package-lock.json && npm cache clean --force
 
-RUN npm install --legacy-peer-deps --no-audit --no-fund
-RUN npm shrinkwrap
+RUN npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
